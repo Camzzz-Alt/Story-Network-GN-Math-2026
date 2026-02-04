@@ -24,6 +24,103 @@
 
   <style>
     
+/* ---------- RECENT REMOVE BUTTON ---------- */
+
+.recent-remove {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 34px;
+  height: 34px;
+  background: rgba(0,0,0,0.55);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: all 0.25s ease;
+  cursor: pointer;
+  z-index: 6;
+}
+
+.zone-item:hover .recent-remove {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.recent-remove svg {
+  width: 18px;
+  height: 18px;
+  stroke: #ff5c5c;
+  stroke-width: 2;
+  fill: none;
+}
+
+.recent-remove:hover {
+  background: rgba(255,0,0,0.6);
+}
+
+    /* ---------- FAVORITES STAR ---------- */
+
+.zone-item {
+  position: relative;
+}
+
+/* star button */
+.favorite-star {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 34px;
+  height: 34px;
+  background: rgba(0,0,0,0.55);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: all 0.25s ease;
+  cursor: pointer;
+  z-index: 5;
+}
+
+/* show on hover */
+.zone-item:hover .favorite-star {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.favorite-star svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: gold;
+  stroke-width: 2;
+}
+
+/* filled when active */
+.favorite-star.active svg {
+  fill: gold;
+}
+
+/* particle */
+.star-particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: gold;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: particle 600ms ease-out forwards;
+}
+
+@keyframes particle {
+  0% { transform: translate(0,0) scale(1); opacity: 1; }
+  100% { transform: translate(var(--x), var(--y)) scale(0); opacity: 0; }
+}
+
     .summary-content {
   display: flex;
   justify-content: space-between; /* text left, button right */
@@ -485,6 +582,16 @@ main {
 
   <main>
 
+    <details id="favoriteZonesWrapper" open>
+  <summary>Favorites</summary>
+  <div id="favoriteZonesList" class="zone-container">
+    <p style="text-align:center; padding:2rem;">No favorites yet.</p>
+  </div>
+</details>
+
+<hr style="margin:2rem 0; border-color:rgba(255,255,255,0.08);">
+
+    
 <details id="recentZonesWrapper" open>
   <summary>
     <span class="summary-text">Recently Played</span>
@@ -574,54 +681,58 @@ main {
       updateRecentlyPlayed();
     }
 
-    function updateRecentlyPlayed() {
-      const recents = JSON.parse(localStorage.getItem("recentZones") || "[]");
-      const list = document.getElementById("recentZonesList");
-      if (!list) return;
-      list.innerHTML = "";
+    function removeFromRecentlyPlayed(id) {
+  let recents = JSON.parse(localStorage.getItem("recentZones") || "[]");
+  recents = recents.filter(x => x !== id);
+  localStorage.setItem("recentZones", JSON.stringify(recents));
+  updateRecentlyPlayed();
+}
 
-      if (recents.length === 0) {
-        list.innerHTML = '<p style="text-align:center; padding:2rem;">No recently played games</p>';
-        return;
-      }
+    
+function updateRecentlyPlayed() {
 
-      recents.forEach(id => {
-        const zone = zones.find(z => z.id == id);
-        if (!zone) return;
+  const recents = JSON.parse(localStorage.getItem("recentZones") || "[]");
+  const list = document.getElementById("recentZonesList");
+  if (!list) return;
 
-        const item = document.createElement("div");
-        item.className = "zone-item";
-        item.onclick = () => openZone(zone);
+  list.innerHTML = "";
 
-        const img = document.createElement("img");
-        img.dataset.src = zone.cover.replace("{COVER_URL}", coverURL).replace("{HTML_URL}", htmlURL);
-        img.alt = zone.name;
-        img.loading = "lazy";
-        img.className = "lazy-zone-img";
-        item.appendChild(img);
+  if (recents.length === 0) {
+    list.innerHTML = '<p style="text-align:center; padding:2rem;">No recently played games</p>';
+    return;
+  }
 
-        const btn = document.createElement("button");
-        btn.textContent = zone.name;
-        btn.onclick = e => { e.stopPropagation(); openZone(zone); };
-        item.appendChild(btn);
+  recents.forEach(id => {
 
-        list.appendChild(item);
-      });
+    const zone = zones.find(z => z.id == id);
+    if (!zone) return;
 
-      const lazyImages = list.querySelectorAll('img.lazy-zone-img');
-      const observer = new IntersectionObserver((entries, obs) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const img = entry.target;
-            img.src = img.dataset.src;
-            img.classList.remove("lazy-zone-img");
-            obs.unobserve(img);
-          }
-        });
-      }, { rootMargin: "120px", threshold: 0.1 });
+    const card = createZoneCard(zone, "recent");
 
-      lazyImages.forEach(img => observer.observe(img));
-    }
+    const remove = document.createElement("div");
+    remove.className = "recent-remove";
+    remove.innerHTML = `
+      <svg viewBox="0 0 24 24">
+        <line x1="6" y1="6" x2="18" y2="18"/>
+        <line x1="18" y1="6" x2="6" y2="18"/>
+      </svg>
+    `;
+
+    remove.onclick = (e) => {
+      e.stopPropagation();
+      card.style.opacity = "0";
+      card.style.transform = "scale(0.8)";
+      setTimeout(() => {
+        removeFromRecentlyPlayed(id);
+      }, 200);
+    };
+
+    card.appendChild(remove);
+    list.appendChild(card);
+  });
+
+}
+
 
     async function listZones() {
       try {
@@ -709,42 +820,91 @@ main {
       updateRecentlyPlayed();
     }
 
-    function displayZones(zonesToShow) {
-      container.innerHTML = "";
-      zonesToShow.forEach(file => {
-        const zoneItem = document.createElement("div");
-        zoneItem.className = "zone-item";
-        zoneItem.onclick = () => openZone(file);
-        const img = document.createElement("img");
-        img.dataset.src = file.cover.replace("{COVER_URL}", coverURL).replace("{HTML_URL}", htmlURL);
-        img.alt = file.name;
-        img.loading = "lazy";
-        img.className = "lazy-zone-img";
-        zoneItem.appendChild(img);
-        const button = document.createElement("button");
-        button.textContent = file.name;
-        button.onclick = (event) => { event.stopPropagation(); openZone(file); };
-        zoneItem.appendChild(button);
-        container.appendChild(zoneItem);
-      });
-      if (container.innerHTML === "") {
-        container.innerHTML = "No zones found.";
-      } else {
-        document.getElementById("allZonesWrapper").querySelector("summary").textContent = `All Games (${zonesToShow.length})`;
-      }
-      const lazyImages = container.querySelectorAll('img.lazy-zone-img');
-      const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const img = entry.target;
-            img.src = img.dataset.src;
-            img.classList.remove("lazy-zone-img");
-            observer.unobserve(img);
-          }
-        });
-      }, { rootMargin: "100px", threshold: 0.1 });
-      lazyImages.forEach(img => imageObserver.observe(img));
+function displayZones(zonesToShow) {
+  container.innerHTML = "";
+
+zonesToShow.forEach(file => {
+  const card = createZoneCard(file, "normal");
+  container.appendChild(card);
+});
+
+
+  if (container.innerHTML === "") {
+    container.innerHTML = "No zones found.";
+  } else {
+    document.getElementById("allZonesWrapper")
+      .querySelector("summary")
+      .textContent = `All Games (${zonesToShow.length})`;
+  }
+}
+
+function createZoneCard(file, mode = "normal") {
+
+  const zoneItem = document.createElement("div");
+  zoneItem.className = "zone-item";
+  zoneItem.onclick = () => openZone(file);
+
+  /* ---------- STAR (NOT FOR RECENTS) ---------- */
+  if (mode !== "recent") {
+
+    const star = document.createElement("div");
+    star.className = "favorite-star";
+    star.innerHTML = `
+      <svg viewBox="0 0 24 24">
+        <polygon points="12 2 15 9 22 9 17 14 19 22 12 18 5 22 7 14 2 9 9 9"></polygon>
+      </svg>
+    `;
+
+    if (getFavorites().includes(file.id)) {
+      star.classList.add("active");
     }
+
+    star.onclick = (e) => {
+      e.stopPropagation();
+      toggleFavorite(file.id, star);
+    };
+
+    zoneItem.appendChild(star);
+  }
+
+  /* ---------- IMAGE ---------- */
+  const img = document.createElement("img");
+  img.dataset.src = file.cover
+    .replace("{COVER_URL}", coverURL)
+    .replace("{HTML_URL}", htmlURL);
+
+  img.alt = file.name;
+  img.loading = "lazy";
+  img.className = "lazy-zone-img";
+
+  /* ---------- BUTTON ---------- */
+  const btn = document.createElement("button");
+  btn.textContent = file.name;
+  btn.onclick = (e) => {
+    e.stopPropagation();
+    openZone(file);
+  };
+
+  zoneItem.appendChild(img);
+  zoneItem.appendChild(btn);
+
+  /* ---------- LAZY LOAD ---------- */
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.src = entry.target.dataset.src;
+        entry.target.classList.remove("lazy-zone-img");
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: "120px", threshold: 0.1 });
+
+  observer.observe(img);
+
+  return zoneItem;
+}
+
+
 
     function filterZones() {
       const query = searchBar.value.toLowerCase();
@@ -920,6 +1080,62 @@ main {
     function closePopup() {
       document.getElementById('popupOverlay').style.display = "none";
     }
+function getFavorites() {
+  return JSON.parse(localStorage.getItem("favorites") || "[]");
+}
+
+function saveFavorites(arr) {
+  localStorage.setItem("favorites", JSON.stringify(arr));
+}
+
+function toggleFavorite(id, starEl) {
+  let favs = getFavorites();
+
+  if (favs.includes(id)) {
+    favs = favs.filter(x => x !== id);
+    starEl.classList.remove("active");
+  } else {
+    favs.push(id);
+    starEl.classList.add("active");
+    spawnParticles(starEl);
+  }
+
+  saveFavorites(favs);
+  updateFavorites();
+}
+
+function spawnParticles(star) {
+  for (let i = 0; i < 10; i++) {
+    const p = document.createElement("div");
+    p.className = "star-particle";
+    p.style.left = "50%";
+    p.style.top = "50%";
+    p.style.setProperty("--x", `${(Math.random()-0.5)*60}px`);
+    p.style.setProperty("--y", `${(Math.random()-0.5)*60}px`);
+    star.appendChild(p);
+    setTimeout(() => p.remove(), 600);
+  }
+}
+
+function updateFavorites() {
+  const list = document.getElementById("favoriteZonesList");
+  const favs = getFavorites();
+  list.innerHTML = "";
+
+  if (favs.length === 0) {
+    list.innerHTML = '<p style="text-align:center; padding:2rem;">No favorites yet.</p>';
+    return;
+  }
+
+  favs.forEach(id => {
+    const zone = zones.find(z => z.id == id);
+    if (!zone) return;
+
+    const item = createZoneCard(zone, "favorite");
+list.appendChild(item);
+
+  });
+}
 
     listZones();
 
@@ -945,4 +1161,3 @@ main {
   </script>
 </body>
 </html>
-
