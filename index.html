@@ -23,6 +23,79 @@
   <meta name="keywords" content="unblocked games, games for school, browser games, chromebook games, no download games, html5 games, free unblocked games, gn-math, fun games at school, crazy cattle 3d, play crazy cattle 3d, crazy cattle 3d unblocked, crazy cattle, crazy cattle unblocked, play crazy cattle, crazy cattle online, crazy cattle 3d online">
 
   <style>
+    
+    .summary-content {
+  display: flex;
+  justify-content: space-between; /* text left, button right */
+  align-items: center;
+  width: 100%;
+}
+
+.clear-recent {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 9999px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.clear-recent:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+    details summary {
+  padding: 0.9rem 1.2rem;      
+  background: rgba(0, 0, 255, 0.2); /* lighter blue */
+  border-radius: 10px;          
+  box-shadow: 0 2px 6px rgba(0,0,255,0.15); /* subtle shadow */
+  transition: all 0.2s ease;
+}
+
+details summary:hover {
+  background: rgba(0, 0, 255, 0.25); /* slightly lighter on hover */
+  transform: translateY(-1px);       
+  box-shadow: 0 3px 8px rgba(0,0,255,0.2); 
+}
+
+ .control-buttons .control-button {
+  margin-right: 0.8rem; /* space between Library and Settings */
+}
+
+.control-button {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 9999px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.control-button:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+    .library-button {
+  background: #0000ff;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 9999px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.library-button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
     :root {
       --primary-color: #0000ff;
       --text-color: #e0e0e0;
@@ -138,11 +211,11 @@
       transform: translateY(-1px);
     }
 
-    main {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 1.5rem;
-    }
+main {
+  max-width: 1600px; /* or 100% if you want it fully wide */
+  margin: 0 auto;
+  padding: 1.5rem;
+}
 
     .zone-container {
       display: grid;
@@ -384,32 +457,47 @@
 
 <body class="dark-mode">
 
-  <header>
-    <div class="header-content">
-      <div class="logo">
-        <img src="https://codehs.com/uploads/84799a0bb8e09668879b73acd5e7abaa" alt="Logo" class="logo-img">
-        Story Network GN Math
-      </div>
-      <div class="search-container">
-        <input type="text" id="searchBar" placeholder="Search Games..." oninput="filterZones()">
-      </div>
-      <div class="control-buttons">
-        <button id="settings">Settings</button>
-      </div>
+<header>
+  <div class="header-content">
+    <!-- Logo -->
+    <div class="logo">
+      <img src="https://codehs.com/uploads/84799a0bb8e09668879b73acd5e7abaa" alt="Logo" class="logo-img">
+      Story Network GN Math
     </div>
-  </header>
+
+    <!-- Search Bar -->
+    <div class="search-container">
+      <input type="text" id="searchBar" placeholder="Search Games..." oninput="filterZones()">
+    </div>
+
+    <!-- Control Buttons: Library + Settings -->
+    <div class="control-buttons">
+      <button class="control-button" onclick="window.open('https://docs.google.com/document/d/1ip8XBOUzU7pzqmPxc2T8YJKHfbYwn6ZmFIPNd7ta708/edit?tab=t.pbpbt3le3921', '_blank')">
+        Library
+      </button>
+      <button id="settings">Settings</button>
+    </div>
+  </div>
+</header>
+
+
+
 
   <main>
 
-    <details id="recentZonesWrapper" open>
-      <summary>Recently Played</summary>
-      <div id="recentZonesList" class="zone-container">
-        <p style="text-align:center; padding:2rem;">No recently played zones yet.</p>
-      </div>
-      <button onclick="localStorage.removeItem('recentZones'); updateRecentlyPlayed();" style="margin:1.5rem auto; display:block; background:#0000ff; color:white; border:none; padding:0.7rem 1.4rem; border-radius:999px; cursor:pointer;">
-        Clear Recent
-      </button>
-    </details>
+<details id="recentZonesWrapper" open>
+  <summary>
+    <span class="summary-text">Recently Played</span>
+    <button class="clear-recent" onclick="localStorage.removeItem('recentZones'); updateRecentlyPlayed();">
+      Clear Recent
+    </button>
+  </summary>
+  <div id="recentZonesList" class="zone-container">
+    <p style="text-align:center; padding:2rem;">No recently played games.</p>
+  </div>
+</details>
+
+
 
     <hr style="margin:2rem 0; border-color:rgba(255,255,255,0.08);">
 
@@ -493,7 +581,7 @@
       list.innerHTML = "";
 
       if (recents.length === 0) {
-        list.innerHTML = '<p style="text-align:center; padding:2rem;">No recently played zones yet.</p>';
+        list.innerHTML = '<p style="text-align:center; padding:2rem;">No recently played games</p>';
         return;
       }
 
