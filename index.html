@@ -458,7 +458,27 @@
       --summary-bg: rgba(0, 123, 255, 0.1);
       --summary-bg-hover: rgba(0, 123, 255, 0.2);
     }
-
+/* Custom Theme: IXL Style (Green/Cyan/Yellow) */
+body[data-custom-theme="ixl"] {
+  --primary-color: #4eb230; /* IXL Green */
+  --primary-glow: rgba(78, 178, 48, 0.5);
+  --background-color: #050505;
+  --card-bg: rgba(20, 20, 20, 0.8);
+  --popup-bg: rgba(15, 15, 15, 0.95);
+  --shadow: 0 8px 32px rgba(78, 178, 48, 0.25);
+  --input-bg: rgba(78, 178, 48, 0.08);
+  --input-border: rgba(0, 122, 204, 0.35); /* Cyan border */
+  --input-border-focus: #007acc; /* Cyan focus */
+  --header-bg-1: rgba(45, 105, 30, 0.9);
+  --header-bg-2: rgba(78, 178, 48, 0.9);
+  --summary-bg: rgba(0, 122, 204, 0.15); /* Cyan summaries */
+  --summary-bg-hover: rgba(0, 122, 204, 0.25);
+  --favorites-bg: rgba(255, 199, 44, 0.15); /* Yellow favorites */
+  --import-color: #4eb230;
+  --search-placeholder: rgba(255, 255, 255, 0.4);
+  --bg-gradient-1: #050505;
+  --bg-gradient-2: #0a0a0a;
+}
     /* Custom Theme: Camzzz (Modern Purple) - NEW */
     body[data-custom-theme="camzzz"] {
       --primary-color: #AA00FF;
@@ -1342,6 +1362,9 @@
         name: "Camzzz GN Math",
         logo: "https://codehs.com/uploads/a9a10c007fe8fccd20732445bd0a74ed"
       }
+	  ixl: { 
+	    name: "IXL Learning", 
+	    logo: "https://upload.wikimedia.org/wikipedia/commons/7/7d/IXL_Learning.png"
     };
     // Background Particles
     function createParticles() {
@@ -1911,6 +1934,10 @@ function updateHeader(themeKey) {
             <div class="theme-option theme-steam ${currentCustomTheme === 'steam' ? 'active' : ''}" onclick="setCustomTheme('steam');" title="Steam">
               <img src="https://codehs.com/uploads/91d3dfec9bcbafba9a912a9b1058b5c2" alt="Steam">
             </div>
+			<div class="theme-option theme-ixl ${currentCustomTheme === 'ixl' ? 'active' : ''}" onclick="setCustomTheme('ixl');" title="IXL Learning">
+			  <img src="https://upload.wikimedia.org/wikipedia/commons/7/7d/IXL_Learning.png" alt="IXL">
+			</div>
+			
 <div class="theme-option theme-epstein" data-custom-theme="epstein" onclick="setCustomTheme('epstein')">
   <img src="https://codehs.com/uploads/e8baba644e4ec12f2f95e2ff6c183233" alt="Epstein">
 </div>
