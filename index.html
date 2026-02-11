@@ -129,32 +129,36 @@
 }
 
 .clear-recent {
-  background: rgba(255, 255, 255, 0.15);
-  border: none;
-  padding: 0.4rem 0.8rem;
+  background: rgba(255, 80, 80, 0.2);
+  border: 1px solid rgba(255, 80, 80, 0.4);
+  padding: 0.4rem 0.9rem;
   border-radius: 9999px;
   color: white;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
+  font-size: 0.9rem;
 }
 
 .clear-recent:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 80, 80, 0.4);
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(255, 80, 80, 0.3);
 }
 
     details summary {
   padding: 0.9rem 1.2rem;      
-  background: rgba(0, 0, 255, 0.2); /* lighter blue */
+  background: var(--summary-bg, rgba(0, 0, 255, 0.2));
   border-radius: 10px;          
-  box-shadow: 0 2px 6px rgba(0,0,255,0.15); /* subtle shadow */
+  box-shadow: 0 2px 6px var(--primary-glow);
   transition: all 0.2s ease;
+  color: var(--text-color);
 }
 
 details summary:hover {
-  background: rgba(0, 0, 255, 0.25); /* slightly lighter on hover */
+  background: var(--summary-bg-hover, rgba(0, 0, 255, 0.25));
   transform: translateY(-1px);       
-  box-shadow: 0 3px 8px rgba(0,0,255,0.2); 
+  box-shadow: 0 3px 8px var(--primary-glow);
 }
 
  .control-buttons .control-button {
@@ -170,11 +174,39 @@ details summary:hover {
   font-size: 1rem;
   font-weight: 800;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 20px var(--primary-glow), 0 4px 15px rgba(0,0,0,0.3);
+  border: 2px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+}
+
+.control-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.control-button:hover::before {
+  width: 300px;
+  height: 300px;
 }
 
 .control-button:hover {
-  opacity: 0.92;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 30px var(--primary-glow), 0 8px 25px rgba(0,0,0,0.4);
+  border-color: rgba(255,255,255,0.3);
+}
+
+.control-button:active {
   transform: translateY(-1px);
 }
 
@@ -195,15 +227,201 @@ details summary:hover {
 
     :root {
       --primary-color: #0000ff;
+      --primary-glow: rgba(0, 0, 255, 0.4);
       --text-color: #e0e0e0;
-      --background-color: #0a0a15;
-      --card-bg: #111122;
+      --background-color: #050505;
+      --card-bg: rgba(20, 20, 20, 0.8);
       --shadow: 0 8px 24px rgba(0,0,0,0.4);
-      --popup-bg: #1a1a2e;
+      --popup-bg: rgba(15, 15, 15, 0.95);
       --font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
       --input-bg: rgba(0,0,255,0.08);
       --input-border: rgba(0,0,255,0.3);
       --input-border-focus: #0000ff;
+      --header-bg-1: rgba(0,0,51,0.9);
+      --header-bg-2: rgba(0,0,85,0.9);
+      --summary-bg: rgba(0, 0, 255, 0.2);
+      --summary-bg-hover: rgba(0, 0, 255, 0.25);
+      --favorites-bg: rgba(0, 0, 255, 0.15);
+      --import-color: #0000ff;
+      --search-placeholder: rgba(255,255,255,0.5);
+      --bg-gradient-1: #050505;
+      --bg-gradient-2: #0a0a0a;
+    }
+
+    /* Cyberpunk Theme */
+    body[data-theme="cyberpunk"] {
+      --primary-color: #ff00ff;
+      --primary-glow: rgba(255, 0, 255, 0.5);
+      --background-color: #050505;
+      --card-bg: rgba(20, 20, 20, 0.8);
+      --popup-bg: rgba(15, 15, 15, 0.95);
+      --shadow: 0 8px 24px rgba(255,0,255,0.2);
+      --input-bg: rgba(255,0,255,0.08);
+      --input-border: rgba(255,0,255,0.3);
+      --input-border-focus: #ff00ff;
+      --header-bg-1: rgba(51,0,51,0.9);
+      --header-bg-2: rgba(85,0,85,0.9);
+      --summary-bg: rgba(255, 0, 255, 0.2);
+      --summary-bg-hover: rgba(255, 0, 255, 0.25);
+      --favorites-bg: rgba(255, 0, 255, 0.15);
+      --import-color: #ff00ff;
+      --search-placeholder: rgba(255,255,255,0.5);
+      --bg-gradient-1: #050505;
+      --bg-gradient-2: #0a0a0a;
+    }
+
+    /* Matrix Theme - FIXED GREEN */
+    body[data-theme="matrix"] {
+      --primary-color: #00cc00;
+      --primary-glow: rgba(0, 204, 0, 0.4);
+      --background-color: #050505;
+      --card-bg: rgba(20, 20, 20, 0.8);
+      --popup-bg: rgba(15, 15, 15, 0.95);
+      --shadow: 0 8px 24px rgba(0,204,0,0.2);
+      --input-bg: rgba(0,204,0,0.08);
+      --input-border: rgba(0,204,0,0.3);
+      --input-border-focus: #00cc00;
+      --header-bg-1: rgba(0,40,0,0.9);
+      --header-bg-2: rgba(0,70,0,0.9);
+      --summary-bg: rgba(0, 204, 0, 0.2);
+      --summary-bg-hover: rgba(0, 204, 0, 0.25);
+      --favorites-bg: rgba(0, 204, 0, 0.15);
+      --import-color: #00cc00;
+      --search-placeholder: rgba(255,255,255,0.5);
+      --bg-gradient-1: #050505;
+      --bg-gradient-2: #0a0a0a;
+    }
+
+    /* Sunset Theme */
+    body[data-theme="sunset"] {
+      --primary-color: #ff6b35;
+      --primary-glow: rgba(255, 107, 53, 0.4);
+      --background-color: #050505;
+      --card-bg: rgba(20, 20, 20, 0.8);
+      --popup-bg: rgba(15, 15, 15, 0.95);
+      --shadow: 0 8px 24px rgba(255,107,53,0.2);
+      --input-bg: rgba(255,107,53,0.08);
+      --input-border: rgba(255,107,53,0.3);
+      --input-border-focus: #ff6b35;
+      --header-bg-1: rgba(51,20,30,0.9);
+      --header-bg-2: rgba(85,30,50,0.9);
+      --summary-bg: rgba(255, 107, 53, 0.2);
+      --summary-bg-hover: rgba(255, 107, 53, 0.25);
+      --favorites-bg: rgba(255, 107, 53, 0.15);
+      --import-color: #ff6b35;
+      --search-placeholder: rgba(255,255,255,0.5);
+      --bg-gradient-1: #050505;
+      --bg-gradient-2: #0a0a0a;
+    }
+
+    /* Custom Theme: The Library (Red) - NEW */
+    body[data-custom-theme="library"] {
+      --primary-color: #cc0000;
+      --primary-glow: rgba(204, 0, 0, 0.5);
+      --background-color: #050505;
+      --card-bg: rgba(20, 20, 20, 0.8);
+      --popup-bg: rgba(15, 15, 15, 0.95);
+      --shadow: 0 8px 32px rgba(204,0,0,0.25);
+      --input-bg: rgba(204,0,0,0.08);
+      --input-border: rgba(204,0,0,0.35);
+      --input-border-focus: #cc0000;
+      --header-bg-1: rgba(150,0,0,0.15);
+      --header-bg-2: rgba(200,0,0,0.25);
+      --summary-bg: rgba(204, 0, 0, 0.15);
+      --summary-bg-hover: rgba(204, 0, 0, 0.25);
+      --favorites-bg: rgba(204, 0, 0, 0.1);
+      --import-color: #cc0000;
+      --search-placeholder: rgba(255,255,255,0.4);
+      --bg-gradient-1: #050505;
+      --bg-gradient-2: #0a0a0a;
+    }
+
+    /* Custom Theme: Awesome Elias (Orange) */
+    body[data-custom-theme="elias"] {
+      --primary-color: #ff8c00;
+      --primary-glow: rgba(255, 140, 0, 0.5);
+      --background-color: #050505;
+      --card-bg: rgba(20, 20, 20, 0.8);
+      --popup-bg: rgba(15, 15, 15, 0.95);
+      --shadow: 0 8px 32px rgba(255,140,0,0.25);
+      --input-bg: rgba(255,140,0,0.08);
+      --input-border: rgba(255,140,0,0.35);
+      --input-border-focus: #ff8c00;
+      --header-bg-1: rgba(255,140,0,0.15);
+      --header-bg-2: rgba(255,100,0,0.25);
+      --summary-bg: rgba(255, 140, 0, 0.15);
+      --summary-bg-hover: rgba(255, 140, 0, 0.25);
+      --favorites-bg: rgba(255, 140, 0, 0.1);
+      --import-color: #ff8c00;
+      --search-placeholder: rgba(255,255,255,0.4);
+      --bg-gradient-1: #050505;
+      --bg-gradient-2: #0a0a0a;
+    }
+
+    /* Custom Theme: Lebron da Goat (Purple) */
+    body[data-custom-theme="lebron"] {
+      --primary-color: #552583;
+      --primary-glow: rgba(85, 37, 131, 0.5);
+      --background-color: #050505;
+      --card-bg: rgba(20, 20, 20, 0.8);
+      --popup-bg: rgba(15, 15, 15, 0.95);
+      --shadow: 0 8px 32px rgba(85,37,131,0.25);
+      --input-bg: rgba(85,37,131,0.08);
+      --input-border: rgba(85,37,131,0.35);
+      --input-border-focus: #552583;
+      --header-bg-1: rgba(85,37,131,0.15);
+      --header-bg-2: rgba(120,50,180,0.25);
+      --summary-bg: rgba(85, 37, 131, 0.15);
+      --summary-bg-hover: rgba(85, 37, 131, 0.25);
+      --favorites-bg: rgba(85, 37, 131, 0.1);
+      --import-color: #552583;
+      --search-placeholder: rgba(255,255,255,0.4);
+      --bg-gradient-1: #050505;
+      --bg-gradient-2: #0a0a0a;
+    }
+
+    /* Custom Theme: GN Kirk (Red) */
+    body[data-custom-theme="kirk"] {
+      --primary-color: #e60000;
+      --primary-glow: rgba(230, 0, 0, 0.5);
+      --background-color: #050505;
+      --card-bg: rgba(20, 20, 20, 0.8);
+      --popup-bg: rgba(15, 15, 15, 0.95);
+      --shadow: 0 8px 32px rgba(230,0,0,0.25);
+      --input-bg: rgba(230,0,0,0.08);
+      --input-border: rgba(230,0,0,0.35);
+      --input-border-focus: #e60000;
+      --header-bg-1: rgba(200,0,0,0.15);
+      --header-bg-2: rgba(255,50,50,0.25);
+      --summary-bg: rgba(230, 0, 0, 0.15);
+      --summary-bg-hover: rgba(230, 0, 0, 0.25);
+      --favorites-bg: rgba(230, 0, 0, 0.1);
+      --import-color: #e60000;
+      --search-placeholder: rgba(255,255,255,0.4);
+      --bg-gradient-1: #050505;
+      --bg-gradient-2: #0a0a0a;
+    }
+
+    /* Custom Theme: Steam (Blue-Gray) */
+    body[data-custom-theme="steam"] {
+      --primary-color: #66c0f4;
+      --primary-glow: rgba(102, 192, 244, 0.5);
+      --background-color: #050505;
+      --card-bg: rgba(20, 20, 20, 0.8);
+      --popup-bg: rgba(15, 15, 15, 0.95);
+      --shadow: 0 8px 32px rgba(102,192,244,0.25);
+      --input-bg: rgba(102,192,244,0.08);
+      --input-border: rgba(102,192,244,0.35);
+      --input-border-focus: #66c0f4;
+      --header-bg-1: rgba(102,192,244,0.15);
+      --header-bg-2: rgba(80,150,200,0.25);
+      --summary-bg: rgba(102, 192, 244, 0.15);
+      --summary-bg-hover: rgba(102, 192, 244, 0.25);
+      --favorites-bg: rgba(102, 192, 244, 0.1);
+      --import-color: #66c0f4;
+      --search-placeholder: rgba(255,255,255,0.4);
+      --bg-gradient-1: #050505;
+      --bg-gradient-2: #0a0a0a;
     }
 
     *,
@@ -218,8 +436,52 @@ details summary:hover {
       font-weight: 500;
       margin: 0;
       padding: 0;
-      background-color: var(--background-color);
+      background: linear-gradient(135deg, var(--bg-gradient-1) 0%, var(--bg-gradient-2) 100%);
+      background-attachment: fixed;
       color: var(--text-color);
+      overflow-x: hidden;
+      transition: background 0.5s ease, color 0.5s ease;
+      min-height: 100vh;
+    }
+
+    /* Animated Background Particles */
+    .bg-particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: var(--primary-color);
+      border-radius: 50%;
+      opacity: 0.4;
+      animation: float linear infinite;
+      box-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color);
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.4;
+      }
+      90% {
+        opacity: 0.4;
+      }
+      100% {
+        transform: translateY(-100vh) translateX(50px);
+        opacity: 0;
+      }
     }
 
     h1, h2, h3, h4, h5, h6,
@@ -239,12 +501,15 @@ details summary:hover {
     }
 
     header {
-      background: linear-gradient(to bottom, #000033, #000055);
+      background: linear-gradient(135deg, var(--header-bg-1), var(--header-bg-2));
+      backdrop-filter: blur(20px);
       padding: 1.2rem 1rem;
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: var(--shadow);
+      box-shadow: var(--shadow), 0 0 30px var(--primary-glow);
+      border-bottom: 2px solid var(--primary-color);
+      transition: all 0.5s ease;
     }
 
     .header-content {
@@ -255,6 +520,8 @@ details summary:hover {
       align-items: center;
       flex-wrap: wrap;
       gap: 1rem;
+      position: relative;
+      z-index: 1;
     }
 
     .logo {
@@ -263,33 +530,72 @@ details summary:hover {
       gap: 12px;
       font-size: 1.6rem;
       font-weight: 900;
+      text-shadow: 0 0 20px var(--primary-glow);
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+      filter: drop-shadow(0 0 15px var(--primary-color));
     }
 
     .logo-img {
       height: 48px;
       border-radius: 12px;
+      transition: transform 0.6s ease;
+    }
+
+    .logo:hover .logo-img {
+      transform: rotate(360deg);
     }
 
     .search-container {
       flex: 1;
       min-width: 220px;
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 15px;
+      font-size: 1.2rem;
+      opacity: 0.7;
+      pointer-events: none;
+      z-index: 2;
     }
 
     #searchBar {
       width: 100%;
-      padding: 0.75rem 1.3rem;
-      border: 1px solid var(--input-border);
+      padding: 0.75rem 1.3rem 0.75rem 2.8rem;
+      border: 2px solid var(--input-border);
       border-radius: 9999px;
       background: var(--input-bg);
       color: white;
       font-size: 1rem;
-      transition: all 0.2s ease;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2), inset 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    #searchBar::placeholder {
+      color: var(--search-placeholder);
+      font-weight: 500;
+    }
+
+    #searchBar:hover {
+      border-color: var(--primary-color);
+      box-shadow: 0 4px 20px var(--primary-glow), inset 0 2px 4px rgba(0,0,0,0.1);
+      transform: translateY(-1px);
     }
 
     #searchBar:focus {
       outline: none;
       border-color: var(--input-border-focus);
-      box-shadow: 0 0 0 3px rgba(0,0,255,0.18);
+      box-shadow: 0 0 0 4px var(--primary-glow), 0 4px 25px var(--primary-glow);
+      transform: translateY(-2px);
+      background: rgba(0,0,0,0.2);
     }
 
     .control-buttons button {
@@ -309,9 +615,11 @@ details summary:hover {
     }
 
 main {
-  max-width: 1600px; /* or 100% if you want it fully wide */
+  max-width: 1600px;
   margin: 0 auto;
   padding: 1.5rem;
+  position: relative;
+  z-index: 1;
 }
 
     .zone-container {
@@ -330,11 +638,14 @@ main {
       transition: all 0.28s ease;
       display: flex;
       flex-direction: column;
+      border: 1px solid rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
     }
 
     .zone-item:hover {
       transform: translateY(-10px) scale(1.035);
-      box-shadow: 0 20px 50px rgba(0,0,255,0.22);
+      box-shadow: 0 20px 50px var(--primary-glow);
+      border-color: var(--primary-color);
     }
 
     .zone-item img {
@@ -344,7 +655,7 @@ main {
     }
 
     .zone-item button {
-      background: rgba(0,0,255,0.10);
+      background: var(--input-bg);
       color: var(--text-color);
       border: none;
       padding: 14px;
@@ -353,16 +664,17 @@ main {
       text-align: center;
       flex-grow: 1;
       transition: background 0.2s;
+      font-weight: 700;
     }
 
     .zone-item button:hover {
-      background: rgba(0,0,255,0.18);
+      background: var(--input-border);
     }
 
     #zoneViewer {
       position: fixed;
       inset: 0;
-      background: rgba(10,10,21,0.96);
+      background: var(--background-color);
       backdrop-filter: blur(10px);
       z-index: 1000;
       display: none;
@@ -370,7 +682,7 @@ main {
     }
 
     .zone-header {
-      background: linear-gradient(to bottom, #000033, #000055);
+      background: linear-gradient(to bottom, var(--header-bg-1), var(--header-bg-2));
       color: white;
       padding: 1rem 1.5rem;
       display: flex;
@@ -397,8 +709,8 @@ main {
     }
 
     .zone-controls button {
-      background: rgba(0,0,255,0.12);
-      border: 1px solid rgba(0,0,255,0.35);
+      background: var(--input-bg);
+      border: 1px solid var(--input-border);
       color: white;
       padding: 0.65rem 1.3rem;
       border-radius: 9999px;
@@ -409,10 +721,10 @@ main {
     }
 
     .zone-controls button:hover {
-      background: rgba(0,0,255,0.22);
-      border-color: rgba(0,0,255,0.7);
+      background: var(--input-border);
+      border-color: var(--primary-color);
       transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(0,0,255,0.25);
+      box-shadow: 0 4px 12px var(--primary-glow);
     }
 
     #zoneFrame {
@@ -444,6 +756,9 @@ main {
       width: 90%;
       max-width: 480px;
       overflow: hidden;
+      transition: all 0.5s ease;
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(20px);
     }
 
     .popup-header {
@@ -453,6 +768,7 @@ main {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      transition: background 0.5s ease;
     }
 
     #popupTitle {
@@ -473,6 +789,7 @@ main {
       padding: 1.8rem;
       font-size: 1.05rem;
       line-height: 1.5;
+      color: var(--text-color);
     }
 
     #popupBody button {
@@ -485,12 +802,37 @@ main {
       border-radius: 9999px;
       font-size: 1.1rem;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px var(--primary-glow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #popupBody button::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.5s ease, height 0.5s ease;
+    }
+
+    #popupBody button:hover::before {
+      width: 300px;
+      height: 300px;
     }
 
     #popupBody button:hover {
-      opacity: 0.93;
-      transform: translateY(-1px);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px var(--primary-glow);
+    }
+
+    #popupBody button:active {
+      transform: translateY(0);
     }
 
     #popupBody input {
@@ -500,14 +842,16 @@ main {
       border: 1px solid var(--input-border);
       border-radius: 9999px;
       background: var(--input-bg);
-      color: white;
+      color: var(--text-color);
       font-size: 1rem;
+      transition: all 0.3s ease;
     }
 
     #popupBody input:focus {
       outline: none;
       border-color: var(--input-border-focus);
-      box-shadow: 0 0 0 3px rgba(0,0,255,0.18);
+      box-shadow: 0 0 0 3px var(--primary-glow), 0 0 20px var(--primary-glow);
+      transform: translateY(-2px);
     }
 
     summary {
@@ -515,9 +859,19 @@ main {
       font-weight: 800;
       cursor: pointer;
       padding: 0.8rem;
-      background: rgba(0,0,255,0.1);
+      background: var(--favorites-bg);
       border-radius: 12px;
       margin-bottom: 1rem;
+      color: var(--text-color);
+      border: 1px solid rgba(255,255,255,0.05);
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    summary:hover {
+      background: var(--summary-bg-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px var(--primary-glow);
     }
 
     footer {
@@ -526,6 +880,9 @@ main {
       text-align: center;
       margin-top: 3rem;
       border-radius: 16px 16px 0 0;
+      transition: background 0.5s ease;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
     }
 
     .footer-links {
@@ -536,10 +893,175 @@ main {
       margin-bottom: 1rem;
     }
 
-    .footer-links a {
-      color: #0000ff;
+    .footer-links a, .footer-links label {
+      color: var(--import-color);
       text-decoration: none;
       font-weight: 600;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .footer-links a:hover, .footer-links label:hover {
+      text-shadow: 0 0 15px var(--primary-glow);
+      transform: translateY(-2px);
+    }
+
+    /* Color Picker Styles */
+    .color-picker-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .color-option {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 12px;
+      border: 3px solid transparent;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .color-option::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: inherit;
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+    }
+
+    .color-option:hover::before {
+      opacity: 1;
+    }
+
+    .color-option:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    }
+
+    .color-option.active {
+      border-color: white;
+      transform: scale(1.05);
+      box-shadow: 0 0 20px currentColor, 0 8px 24px rgba(0,0,0,0.4);
+    }
+
+    .color-option.active::after {
+      content: '✓';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 2rem;
+      font-weight: bold;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    }
+
+    .color-blue { background: linear-gradient(135deg, #0000ff, #00aaff); }
+    .color-cyberpunk { background: linear-gradient(135deg, #ff00ff, #ff0099); }
+    .color-matrix { background: linear-gradient(135deg, #00cc00, #009900); }
+    .color-sunset { background: linear-gradient(135deg, #ff6b35, #ff9933); }
+
+    /* Custom Theme Options */
+    .theme-option {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 12px;
+      border: 3px solid transparent;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .theme-option img {
+      width: 70%;
+      height: 70%;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    .theme-option:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    }
+
+    .theme-option.active {
+      border-color: white;
+      transform: scale(1.05);
+      box-shadow: 0 0 20px var(--primary-color), 0 8px 24px rgba(0,0,0,0.4);
+    }
+
+    .theme-option.active::after {
+      content: '✓';
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      color: white;
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+      background: var(--primary-color);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .theme-default { background: linear-gradient(135deg, #050505, #0a0a0a); }
+    .theme-library { background: linear-gradient(135deg, #050505, #cc0000); }
+    .theme-elias { background: linear-gradient(135deg, #050505, #ff8c00); }
+    .theme-lebron { background: linear-gradient(135deg, #050505, #552583); }
+    .theme-kirk { background: linear-gradient(135deg, #050505, #e60000); }
+    .theme-steam { background: linear-gradient(135deg, #050505, #66c0f4); }
+
+    /* Settings Tabs */
+    .settings-tabs {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid var(--input-border);
+    }
+
+    .settings-tab {
+      padding: 0.75rem 1.5rem;
+      background: transparent;
+      border: none;
+      color: var(--text-color);
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+    }
+
+    .settings-tab:hover {
+      color: var(--primary-color);
+    }
+
+    .settings-tab.active {
+      color: var(--primary-color);
+      border-bottom-color: var(--primary-color);
+    }
+
+    .settings-panel {
+      display: none;
+    }
+
+    .settings-panel.active {
+      display: block;
     }
 
     @media (max-width: 768px) {
@@ -552,27 +1074,31 @@ main {
   </style>
 </head>
 
-<body class="dark-mode">
+<body data-theme="default">
+
+<!-- Animated Background Particles -->
+<div class="bg-particles" id="bgParticles"></div>
 
 <header>
   <div class="header-content">
     <!-- Logo -->
     <div class="logo">
-      <img src="https://codehs.com/uploads/84799a0bb8e09668879b73acd5e7abaa" alt="Logo" class="logo-img">
-      Story Network GN Math
+      <img src="https://codehs.com/uploads/84799a0bb8e09668879b73acd5e7abaa" alt="Logo" class="logo-img" id="headerLogo">
+      <span id="headerText">Story Network GN Math</span>
     </div>
 
     <!-- Search Bar -->
     <div class="search-container">
+      <span class="search-icon">🔍</span>
       <input type="text" id="searchBar" placeholder="Search Games..." oninput="filterZones()">
     </div>
 
     <!-- Control Buttons: Library + Settings -->
     <div class="control-buttons">
       <button class="control-button" onclick="window.open('https://docs.google.com/document/d/1ip8XBOUzU7pzqmPxc2T8YJKHfbYwn6ZmFIPNd7ta708/edit?tab=t.pbpbt3le3921', '_blank')">
-        Library
+        📚 Library
       </button>
-      <button id="settings">Settings</button>
+      <button class="control-button" id="settings">⚙️ Settings</button>
     </div>
   </div>
 </header>
@@ -595,7 +1121,7 @@ main {
 <details id="recentZonesWrapper" open>
   <summary>
     <span class="summary-text">Recently Played</span>
-    <button class="clear-recent" onclick="localStorage.removeItem('recentZones'); updateRecentlyPlayed();">
+    <button class="clear-recent" onclick="clearRecent(); event.stopPropagation();">
       Clear Recent
     </button>
   </summary>
@@ -616,8 +1142,8 @@ main {
   </main>
 
   <div id="zoneViewer">
-    <div id="zoneLoading">
-      <div class="spinner"></div>
+    <div id="zoneLoading" style="display:none; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%);">
+      <div class="spinner" style="width:50px; height:50px; border:4px solid var(--primary-color); border-top:4px solid transparent; border-radius:50%; animation:spin 1s linear infinite;"></div>
     </div>
     <div class="zone-header">
       <div class="zone-title">
@@ -658,7 +1184,7 @@ main {
       <a href="#" onclick="showContact(); return false;">Contact</a>
       <a href="#" onclick="loadPrivacy(); return false;">Privacy Policy</a>
       <a href="javascript:saveData()">Export Data</a>
-      <label for="importData" style="color: #0000ff; cursor: pointer;">Import Data</label>
+      <label for="importData">Import Data</label>
       <input type="file" id="importData" style="display: none;" onchange="loadData(event)">
     </div>
   </footer>
@@ -668,11 +1194,162 @@ main {
     const zoneViewer = document.getElementById('zoneViewer');
     let zoneFrame = document.getElementById('zoneFrame');
     const searchBar = document.getElementById('searchBar');
+    // FIXED: Removed spaces from URLs
     const zonesURL = "https://cdn.jsdelivr.net/gh/gn-math/assets@main/zones.json";
     const coverURL = "https://cdn.jsdelivr.net/gh/gn-math/covers@main";
     const htmlURL = "https://cdn.jsdelivr.net/gh/gn-math/html@main";
     let zones = [];
     let popularityData = {};
+
+    // Theme configuration
+    const themeConfig = {
+      default: {
+        name: "Story Network GN Math",
+        logo: "https://codehs.com/uploads/84799a0bb8e09668879b73acd5e7abaa"
+      },
+      library: {
+        name: "The Library GN Math",
+        logo: "https://codehs.com/uploads/42b9587a6dd73b104e8ef00959c00eda"
+      },
+      elias: {
+        name: "Awesome Elias",
+        logo: "https://codehs.com/uploads/bd2f2da062e0ca21039d671950a1b4f2"
+      },
+      lebron: {
+        name: "Lebron da Goat",
+        logo: "https://codehs.com/uploads/4f53f068f90e1f12917f4079284218fc"
+      },
+      kirk: {
+        name: "GN Kirk",
+        logo: "https://codehs.com/uploads/253e24974900cadf0698ddb27ec82579"
+      },
+      steam: {
+        name: "HTML Steam",
+        logo: "https://codehs.com/uploads/91d3dfec9bcbafba9a912a9b1058b5c2"
+      }
+    };
+
+    // Background Particles
+    function createParticles() {
+      const particlesContainer = document.getElementById('bgParticles');
+      particlesContainer.innerHTML = '';
+      for (let i = 0; i < 30; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+        particle.style.animationDelay = Math.random() * 5 + 's';
+        particlesContainer.appendChild(particle);
+      }
+    }
+
+    // Theme Switcher - FIXED to properly apply everything
+    function setTheme(theme) {
+      // Remove custom theme if set
+      document.body.removeAttribute('data-custom-theme');
+      // Set the color theme
+      document.body.setAttribute('data-theme', theme);
+      
+      // Save to localStorage
+      localStorage.setItem('theme', theme);
+      localStorage.removeItem('customTheme');
+      
+      // Update header to default
+      updateHeader('default');
+      
+      // Update UI
+      updateThemeUI();
+      
+      // Recreate particles with new color
+      createParticles();
+    }
+
+    function setCustomTheme(customTheme) {
+      // Remove color theme
+      document.body.removeAttribute('data-theme');
+      // Set custom theme
+      document.body.setAttribute('data-custom-theme', customTheme);
+      
+      // Save to localStorage
+      localStorage.setItem('customTheme', customTheme);
+      localStorage.removeItem('theme');
+      
+      // Update header based on custom theme
+      updateHeader(customTheme);
+      
+      // Update UI
+      updateThemeUI();
+      
+      // Recreate particles with new color
+      createParticles();
+    }
+
+    // Update header logo and text
+    function updateHeader(themeKey) {
+      const config = themeConfig[themeKey] || themeConfig.default;
+      const logoImg = document.getElementById('headerLogo');
+      const headerText = document.getElementById('headerText');
+      
+      if (logoImg) {
+        logoImg.src = config.logo;
+        logoImg.alt = config.name + " Logo";
+      }
+      if (headerText) {
+        headerText.textContent = config.name;
+      }
+      document.title = config.name;
+    }
+
+    // Update UI to reflect current theme
+    function updateThemeUI() {
+      const currentTheme = localStorage.getItem('theme') || 'default';
+      const currentCustomTheme = localStorage.getItem('customTheme');
+      
+      // Update color options
+      document.querySelectorAll('.color-option').forEach(btn => {
+        btn.classList.remove('active');
+        const themeName = btn.classList.contains('color-blue') ? 'default' :
+                         btn.classList.contains('color-cyberpunk') ? 'cyberpunk' :
+                         btn.classList.contains('color-matrix') ? 'matrix' :
+                         btn.classList.contains('color-sunset') ? 'sunset' : '';
+        if (!currentCustomTheme && currentTheme === themeName) {
+          btn.classList.add('active');
+        }
+      });
+      
+      // Update custom theme options
+      document.querySelectorAll('.theme-option').forEach(btn => {
+        btn.classList.remove('active');
+        const customName = btn.classList.contains('theme-default') ? 'default' :
+                          btn.classList.contains('theme-library') ? 'library' :
+                          btn.classList.contains('theme-elias') ? 'elias' :
+                          btn.classList.contains('theme-lebron') ? 'lebron' :
+                          btn.classList.contains('theme-kirk') ? 'kirk' :
+                          btn.classList.contains('theme-steam') ? 'steam' : '';
+        if (currentCustomTheme === customName || (!currentCustomTheme && customName === 'default' && currentTheme === 'default')) {
+          btn.classList.add('active');
+        }
+      });
+    }
+
+    // Load saved theme on startup
+    function loadSavedTheme() {
+      const savedTheme = localStorage.getItem('theme');
+      const savedCustomTheme = localStorage.getItem('customTheme');
+      
+      if (savedCustomTheme) {
+        document.body.setAttribute('data-custom-theme', savedCustomTheme);
+        updateHeader(savedCustomTheme);
+      } else if (savedTheme) {
+        document.body.setAttribute('data-theme', savedTheme);
+        updateHeader('default');
+      } else {
+        document.body.setAttribute('data-theme', 'default');
+        updateHeader('default');
+      }
+      
+      updateThemeUI();
+    }
 
     function recordRecent(id) {
       let recents = JSON.parse(localStorage.getItem("recentZones") || "[]");
@@ -686,6 +1363,13 @@ main {
   recents = recents.filter(x => x !== id);
   localStorage.setItem("recentZones", JSON.stringify(recents));
   updateRecentlyPlayed();
+}
+
+function clearRecent() {
+  if (confirm('Clear all recent games?')) {
+    localStorage.removeItem('recentZones');
+    updateRecentlyPlayed();
+  }
 }
 
     
@@ -818,6 +1502,7 @@ function updateRecentlyPlayed() {
       zones.sort((a, b) => a.name.localeCompare(b.name));
       displayZones(zones);
       updateRecentlyPlayed();
+      updateFavorites();
     }
 
 function displayZones(zonesToShow) {
@@ -1048,10 +1733,71 @@ function createZoneCard(file, mode = "normal") {
       document.getElementById('popupOverlay').style.display = "flex";
     }
 
+    function showColorSettings() {
+      closePopup();
+      const currentTheme = localStorage.getItem('theme') || 'default';
+      const currentCustomTheme = localStorage.getItem('customTheme');
+      
+      document.getElementById('popupTitle').textContent = "Appearance";
+      document.getElementById('popupBody').innerHTML = `
+        <div class="settings-tabs">
+          <button class="settings-tab active" onclick="switchSettingsTab('colors', this)">Color Themes</button>
+          <button class="settings-tab" onclick="switchSettingsTab('custom', this)">Custom Themes</button>
+        </div>
+        
+        <div class="settings-panel active" id="colors-panel">
+          <p style="margin-bottom: 1rem; color: var(--text-color);">Choose your color theme:</p>
+          <div class="color-picker-grid">
+            <div class="color-option color-blue ${!currentCustomTheme && currentTheme === 'default' ? 'active' : ''}" onclick="setTheme('default');" title="Classic Blue"></div>
+            <div class="color-option color-cyberpunk ${!currentCustomTheme && currentTheme === 'cyberpunk' ? 'active' : ''}" onclick="setTheme('cyberpunk');" title="Cyberpunk"></div>
+            <div class="color-option color-matrix ${!currentCustomTheme && currentTheme === 'matrix' ? 'active' : ''}" onclick="setTheme('matrix');" title="Matrix"></div>
+            <div class="color-option color-sunset ${!currentCustomTheme && currentTheme === 'sunset' ? 'active' : ''}" onclick="setTheme('sunset');" title="Sunset"></div>
+          </div>
+        </div>
+        
+        <div class="settings-panel" id="custom-panel">
+          <p style="margin-bottom: 1rem; color: var(--text-color);">Choose your custom theme:</p>
+          <div class="color-picker-grid">
+            <div class="theme-option theme-default ${!currentCustomTheme && currentTheme === 'default' ? 'active' : ''}" onclick="setTheme('default');" title="GN Math">
+              <img src="https://codehs.com/uploads/84799a0bb8e09668879b73acd5e7abaa" alt="GN Math">
+            </div>
+            <div class="theme-option theme-library ${currentCustomTheme === 'library' ? 'active' : ''}" onclick="setCustomTheme('library');" title="The Library">
+              <img src="https://codehs.com/uploads/42b9587a6dd73b104e8ef00959c00eda" alt="Library">
+            </div>
+            <div class="theme-option theme-elias ${currentCustomTheme === 'elias' ? 'active' : ''}" onclick="setCustomTheme('elias');" title="Awesome Elias">
+              <img src="https://codehs.com/uploads/bd2f2da062e0ca21039d671950a1b4f2" alt="Elias">
+            </div>
+            <div class="theme-option theme-lebron ${currentCustomTheme === 'lebron' ? 'active' : ''}" onclick="setCustomTheme('lebron');" title="Lebron da Goat">
+              <img src="https://codehs.com/uploads/4f53f068f90e1f12917f4079284218fc" alt="Lebron">
+            </div>
+            <div class="theme-option theme-kirk ${currentCustomTheme === 'kirk' ? 'active' : ''}" onclick="setCustomTheme('kirk');" title="GN Kirk">
+              <img src="https://codehs.com/uploads/253e24974900cadf0698ddb27ec82579" alt="Kirk">
+            </div>
+            <div class="theme-option theme-steam ${currentCustomTheme === 'steam' ? 'active' : ''}" onclick="setCustomTheme('steam');" title="Steam">
+              <img src="https://codehs.com/uploads/91d3dfec9bcbafba9a912a9b1058b5c2" alt="Steam">
+            </div>
+          </div>
+          <p style="margin-top: 1.5rem; font-size: 0.9rem; opacity: 0.7; color: var(--text-color);">Suggest New Themes in the Library!</p>
+        </div>
+      `;
+      document.getElementById('popupOverlay').style.display = "flex";
+    }
+
+    function switchSettingsTab(tab, btn) {
+      // Update tab buttons
+      document.querySelectorAll('.settings-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      // Update panels
+      document.querySelectorAll('.settings-panel').forEach(panel => panel.classList.remove('active'));
+      document.getElementById(tab + '-panel').classList.add('active');
+    }
+
     document.getElementById('settings').addEventListener('click', () => {
       document.getElementById('popupTitle').textContent = "Settings";
       document.getElementById('popupBody').innerHTML = `
-        <button onclick="tabCloak()">Tab Cloak</button>
+        <button onclick="showColorSettings()">🎨 Appearance</button>
+        <button onclick="tabCloak()">🎭 Tab Cloak</button>
       `;
       document.getElementById('popupOverlay').style.display = "flex";
     });
@@ -1132,11 +1878,17 @@ function updateFavorites() {
     if (!zone) return;
 
     const item = createZoneCard(zone, "favorite");
-list.appendChild(item);
-
+    list.appendChild(item);
   });
+
+  document.getElementById("favoriteZonesWrapper")
+    .querySelector("summary")
+    .innerHTML = `Favorites (${favs.length})`;
 }
 
+    // Initialize
+    loadSavedTheme(); // Load theme before creating particles
+    createParticles();
     listZones();
 
     const schoolList = ["deledao", "goguardian", "lightspeed", "linewize", "securly", ".edu/"];
