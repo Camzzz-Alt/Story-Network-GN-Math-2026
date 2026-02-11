@@ -1358,14 +1358,15 @@ body[data-custom-theme="ixl"] {
         name: "We Hate Securly",
         logo: "https://codehs.com/uploads/3db91fabcc5ff2565afaa29a6e9ca71d"
       },
-      camzzz: {
+	  camzzz: {
         name: "Camzzz GN Math",
         logo: "https://codehs.com/uploads/a9a10c007fe8fccd20732445bd0a74ed"
-      }
-	  ixl: { 
-	    name: "IXL Learning", 
-	    logo: "https://upload.wikimedia.org/wikipedia/commons/7/7d/IXL_Learning.png"
-    };
+      }, // <--- MAKE SURE THIS COMMA IS HERE
+      ixl: { 
+        name: "IXL Learning", 
+        logo: "https://upload.wikimedia.org/wikipedia/commons/7/7d/IXL_Learning.png" 
+      } // <--- NO SEMICOLON HERE
+    }; // <--- THIS CLOSES THE ENTIRE themeConfig
     // Background Particles
     function createParticles() {
       const particlesContainer = document.getElementById('bgParticles');
