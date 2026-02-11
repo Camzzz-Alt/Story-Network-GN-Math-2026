@@ -429,7 +429,27 @@
       --bg-gradient-1: #050505;
       --bg-gradient-2: #0a0a0a;
     }
-
+	/* Custom Theme: Epstein (Grey, Black, and White) */
+    body[data-custom-theme="epstein"] {
+      --primary-color: #666666; /* Grey */
+      --primary-glow: rgba(102, 102, 102, 0.5);
+      --background-color: #000000; /* Black */
+      --card-bg: rgba(30, 30, 30, 0.8);
+      --popup-bg: rgba(10, 10, 10, 0.95);
+      --shadow: 0 8px 32px rgba(255, 255, 255, 0.1);
+      --input-bg: rgba(255, 255, 255, 0.05);
+      --input-border: rgba(255, 255, 255, 0.2);
+      --input-border-focus: #ffffff; /* White */
+      --header-bg-1: rgba(20, 20, 20, 0.95);
+      --header-bg-2: rgba(0, 0, 0, 0.95);
+      --summary-bg: rgba(102, 102, 102, 0.2);
+      --summary-bg-hover: rgba(102, 102, 102, 0.3);
+      --favorites-bg: rgba(102, 102, 102, 0.1);
+      --import-color: #ffffff;
+      --search-placeholder: rgba(255, 255, 255, 0.4);
+      --bg-gradient-1: #000000;
+      --bg-gradient-2: #1a1a1a;
+    }
     /* Custom Theme: Securly (White/Blue) - NEW */
     body[data-custom-theme="securly"] {
       --primary-color: #007bff;
@@ -1112,6 +1132,9 @@
     .theme-steam {
       background: linear-gradient(135deg, #050505, #66c0f4);
     }
+    .theme-epstein { 
+      background: linear-gradient(135deg, #050505, #666666); 
+    }
 
     /* Settings Tabs */
     .settings-tabs {
@@ -1314,6 +1337,10 @@
         name: "GN Kirk",
         logo: "https://codehs.com/uploads/253e24974900cadf0698ddb27ec82579"
       },
+      epstein: {
+        name: "Big E Math",
+        logo: "https://codehs.com/uploads/e8baba644e4ec12f2f95e2ff6c183233"
+      },      
       steam: {
         name: "HTML Steam",
         logo: "https://codehs.com/uploads/91d3dfec9bcbafba9a912a9b1058b5c2"
@@ -1893,6 +1920,9 @@
             <div class="theme-option theme-steam ${currentCustomTheme === 'steam' ? 'active' : ''}" onclick="setCustomTheme('steam');" title="Steam">
               <img src="https://codehs.com/uploads/91d3dfec9bcbafba9a912a9b1058b5c2" alt="Steam">
             </div>
+<div class="theme-option theme-epstein" data-custom-theme="epstein" onclick="setCustomTheme('epstein')">
+  <img src="https://codehs.com/uploads/e8baba644e4ec12f2f95e2ff6c183233" alt="Epstein">
+</div>
             <div class="theme-option ${currentCustomTheme === 'securly' ? 'active' : ''}" style="background:#007bff;" onclick="setCustomTheme('securly');" title="Securly">
               <img src="https://codehs.com/uploads/3db91fabcc5ff2565afaa29a6e9ca71d" alt="Securly">
             </div>
