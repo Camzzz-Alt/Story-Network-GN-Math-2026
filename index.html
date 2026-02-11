@@ -23,207 +23,213 @@
   <meta name="keywords" content="unblocked games, games for school, browser games, chromebook games, no download games, html5 games, free unblocked games, gn-math, fun games at school, crazy cattle 3d, play crazy cattle 3d, crazy cattle 3d unblocked, crazy cattle, crazy cattle unblocked, play crazy cattle, crazy cattle online, crazy cattle 3d online">
 
   <style>
-    
-/* ---------- RECENT REMOVE BUTTON ---------- */
+    /* ---------- RECENT REMOVE BUTTON ---------- */
+    .recent-remove {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 34px;
+      height: 34px;
+      background: rgba(0, 0, 0, 0.55);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: scale(0.6);
+      transition: all 0.25s ease;
+      cursor: pointer;
+      z-index: 6;
+    }
 
-.recent-remove {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 34px;
-  height: 34px;
-  background: rgba(0,0,0,0.55);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transform: scale(0.6);
-  transition: all 0.25s ease;
-  cursor: pointer;
-  z-index: 6;
-}
+    .zone-item:hover .recent-remove {
+      opacity: 1;
+      transform: scale(1);
+    }
 
-.zone-item:hover .recent-remove {
-  opacity: 1;
-  transform: scale(1);
-}
+    .recent-remove svg {
+      width: 18px;
+      height: 18px;
+      stroke: #ff5c5c;
+      stroke-width: 2;
+      fill: none;
+    }
 
-.recent-remove svg {
-  width: 18px;
-  height: 18px;
-  stroke: #ff5c5c;
-  stroke-width: 2;
-  fill: none;
-}
-
-.recent-remove:hover {
-  background: rgba(255,0,0,0.6);
-}
+    .recent-remove:hover {
+      background: rgba(255, 0, 0, 0.6);
+    }
 
     /* ---------- FAVORITES STAR ---------- */
+    .zone-item {
+      position: relative;
+    }
 
-.zone-item {
-  position: relative;
-}
+    /* star button */
+    .favorite-star {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 34px;
+      height: 34px;
+      background: rgba(0, 0, 0, 0.55);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: scale(0.6);
+      transition: all 0.25s ease;
+      cursor: pointer;
+      z-index: 5;
+    }
 
-/* star button */
-.favorite-star {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 34px;
-  height: 34px;
-  background: rgba(0,0,0,0.55);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transform: scale(0.6);
-  transition: all 0.25s ease;
-  cursor: pointer;
-  z-index: 5;
-}
+    /* show on hover */
+    .zone-item:hover .favorite-star {
+      opacity: 1;
+      transform: scale(1);
+    }
 
-/* show on hover */
-.zone-item:hover .favorite-star {
-  opacity: 1;
-  transform: scale(1);
-}
+    .favorite-star svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: gold;
+      stroke-width: 2;
+    }
 
-.favorite-star svg {
-  width: 18px;
-  height: 18px;
-  fill: none;
-  stroke: gold;
-  stroke-width: 2;
-}
+    /* filled when active */
+    .favorite-star.active svg {
+      fill: gold;
+    }
 
-/* filled when active */
-.favorite-star.active svg {
-  fill: gold;
-}
+    /* particle */
+    .star-particle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: gold;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: particle 600ms ease-out forwards;
+    }
 
-/* particle */
-.star-particle {
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  background: gold;
-  border-radius: 50%;
-  pointer-events: none;
-  animation: particle 600ms ease-out forwards;
-}
+    @keyframes particle {
+      0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+      }
 
-@keyframes particle {
-  0% { transform: translate(0,0) scale(1); opacity: 1; }
-  100% { transform: translate(var(--x), var(--y)) scale(0); opacity: 0; }
-}
+      100% {
+        transform: translate(var(--x), var(--y)) scale(0);
+        opacity: 0;
+      }
+    }
 
     .summary-content {
-  display: flex;
-  justify-content: space-between; /* text left, button right */
-  align-items: center;
-  width: 100%;
-}
+      display: flex;
+      justify-content: space-between;
+      /* text left, button right */
+      align-items: center;
+      width: 100%;
+    }
 
-.clear-recent {
-  background: rgba(255, 80, 80, 0.2);
-  border: 1px solid rgba(255, 80, 80, 0.4);
-  padding: 0.4rem 0.9rem;
-  border-radius: 9999px;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  font-size: 0.9rem;
-}
+    .clear-recent {
+      background: rgba(255, 80, 80, 0.2);
+      border: 1px solid rgba(255, 80, 80, 0.4);
+      padding: 0.4rem 0.9rem;
+      border-radius: 9999px;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      font-size: 0.9rem;
+    }
 
-.clear-recent:hover {
-  background: rgba(255, 80, 80, 0.4);
-  transform: scale(1.05);
-  box-shadow: 0 4px 15px rgba(255, 80, 80, 0.3);
-}
+    .clear-recent:hover {
+      background: rgba(255, 80, 80, 0.4);
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(255, 80, 80, 0.3);
+    }
 
     details summary {
-  padding: 0.9rem 1.2rem;      
-  background: var(--summary-bg, rgba(0, 0, 255, 0.2));
-  border-radius: 10px;          
-  box-shadow: 0 2px 6px var(--primary-glow);
-  transition: all 0.2s ease;
-  color: var(--text-color);
-}
+      padding: 0.9rem 1.2rem;
+      background: var(--summary-bg, rgba(0, 0, 255, 0.2));
+      border-radius: 10px;
+      box-shadow: 0 2px 6px var(--primary-glow);
+      transition: all 0.2s ease;
+      color: var(--text-color);
+    }
 
-details summary:hover {
-  background: var(--summary-bg-hover, rgba(0, 0, 255, 0.25));
-  transform: translateY(-1px);       
-  box-shadow: 0 3px 8px var(--primary-glow);
-}
+    details summary:hover {
+      background: var(--summary-bg-hover, rgba(0, 0, 255, 0.25));
+      transform: translateY(-1px);
+      box-shadow: 0 3px 8px var(--primary-glow);
+    }
 
- .control-buttons .control-button {
-  margin-right: 0.8rem; /* space between Library and Settings */
-}
+    .control-buttons .control-button {
+      margin-right: 0.8rem;
+      /* space between Library and Settings */
+    }
 
-.control-button {
-  background: var(--primary-color);
-  color: white;
-  border: none;
-  border-radius: 9999px;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  font-weight: 800;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 0 20px var(--primary-glow), 0 4px 15px rgba(0,0,0,0.3);
-  border: 2px solid rgba(255,255,255,0.1);
-  backdrop-filter: blur(10px);
-}
+    .control-button {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 9999px;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 20px var(--primary-glow), 0 4px 15px rgba(0, 0, 0, 0.3);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+    }
 
-.control-button::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.3);
-  transform: translate(-50%, -50%);
-  transition: width 0.6s ease, height 0.6s ease;
-}
+    .control-button::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s ease, height 0.6s ease;
+    }
 
-.control-button:hover::before {
-  width: 300px;
-  height: 300px;
-}
+    .control-button:hover::before {
+      width: 300px;
+      height: 300px;
+    }
 
-.control-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 5px 30px var(--primary-glow), 0 8px 25px rgba(0,0,0,0.4);
-  border-color: rgba(255,255,255,0.3);
-}
+    .control-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 30px var(--primary-glow), 0 8px 25px rgba(0, 0, 0, 0.4);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
 
-.control-button:active {
-  transform: translateY(-1px);
-}
+    .control-button:active {
+      transform: translateY(-1px);
+    }
 
     .library-button {
-  background: #0000ff;
-  color: white;
-  padding: 0.6rem 1.2rem;
-  border-radius: 9999px;
-  font-weight: 700;
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
+      background: #0000ff;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border-radius: 9999px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
 
-.library-button:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
-}
+    .library-button:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
 
     :root {
       --primary-color: #0000ff;
@@ -231,19 +237,19 @@ details summary:hover {
       --text-color: #e0e0e0;
       --background-color: #050505;
       --card-bg: rgba(20, 20, 20, 0.8);
-      --shadow: 0 8px 24px rgba(0,0,0,0.4);
+      --shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
       --popup-bg: rgba(15, 15, 15, 0.95);
       --font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
-      --input-bg: rgba(0,0,255,0.08);
-      --input-border: rgba(0,0,255,0.3);
+      --input-bg: rgba(0, 0, 255, 0.08);
+      --input-border: rgba(0, 0, 255, 0.3);
       --input-border-focus: #0000ff;
-      --header-bg-1: rgba(0,0,51,0.9);
-      --header-bg-2: rgba(0,0,85,0.9);
+      --header-bg-1: rgba(0, 0, 51, 0.9);
+      --header-bg-2: rgba(0, 0, 85, 0.9);
       --summary-bg: rgba(0, 0, 255, 0.2);
       --summary-bg-hover: rgba(0, 0, 255, 0.25);
       --favorites-bg: rgba(0, 0, 255, 0.15);
       --import-color: #0000ff;
-      --search-placeholder: rgba(255,255,255,0.5);
+      --search-placeholder: rgba(255, 255, 255, 0.5);
       --bg-gradient-1: #050505;
       --bg-gradient-2: #0a0a0a;
     }
@@ -255,39 +261,39 @@ details summary:hover {
       --background-color: #050505;
       --card-bg: rgba(20, 20, 20, 0.8);
       --popup-bg: rgba(15, 15, 15, 0.95);
-      --shadow: 0 8px 24px rgba(255,0,255,0.2);
-      --input-bg: rgba(255,0,255,0.08);
-      --input-border: rgba(255,0,255,0.3);
+      --shadow: 0 8px 24px rgba(255, 0, 255, 0.2);
+      --input-bg: rgba(255, 0, 255, 0.08);
+      --input-border: rgba(255, 0, 255, 0.3);
       --input-border-focus: #ff00ff;
-      --header-bg-1: rgba(51,0,51,0.9);
-      --header-bg-2: rgba(85,0,85,0.9);
+      --header-bg-1: rgba(51, 0, 51, 0.9);
+      --header-bg-2: rgba(85, 0, 85, 0.9);
       --summary-bg: rgba(255, 0, 255, 0.2);
       --summary-bg-hover: rgba(255, 0, 255, 0.25);
       --favorites-bg: rgba(255, 0, 255, 0.15);
       --import-color: #ff00ff;
-      --search-placeholder: rgba(255,255,255,0.5);
+      --search-placeholder: rgba(255, 255, 255, 0.5);
       --bg-gradient-1: #050505;
       --bg-gradient-2: #0a0a0a;
     }
 
-    /* Matrix Theme - FIXED GREEN */
+    /* Matrix Theme */
     body[data-theme="matrix"] {
       --primary-color: #00cc00;
       --primary-glow: rgba(0, 204, 0, 0.4);
       --background-color: #050505;
       --card-bg: rgba(20, 20, 20, 0.8);
       --popup-bg: rgba(15, 15, 15, 0.95);
-      --shadow: 0 8px 24px rgba(0,204,0,0.2);
-      --input-bg: rgba(0,204,0,0.08);
-      --input-border: rgba(0,204,0,0.3);
+      --shadow: 0 8px 24px rgba(0, 204, 0, 0.2);
+      --input-bg: rgba(0, 204, 0, 0.08);
+      --input-border: rgba(0, 204, 0, 0.3);
       --input-border-focus: #00cc00;
-      --header-bg-1: rgba(0,40,0,0.9);
-      --header-bg-2: rgba(0,70,0,0.9);
+      --header-bg-1: rgba(0, 40, 0, 0.9);
+      --header-bg-2: rgba(0, 70, 0, 0.9);
       --summary-bg: rgba(0, 204, 0, 0.2);
       --summary-bg-hover: rgba(0, 204, 0, 0.25);
       --favorites-bg: rgba(0, 204, 0, 0.15);
       --import-color: #00cc00;
-      --search-placeholder: rgba(255,255,255,0.5);
+      --search-placeholder: rgba(255, 255, 255, 0.5);
       --bg-gradient-1: #050505;
       --bg-gradient-2: #0a0a0a;
     }
@@ -299,39 +305,39 @@ details summary:hover {
       --background-color: #050505;
       --card-bg: rgba(20, 20, 20, 0.8);
       --popup-bg: rgba(15, 15, 15, 0.95);
-      --shadow: 0 8px 24px rgba(255,107,53,0.2);
-      --input-bg: rgba(255,107,53,0.08);
-      --input-border: rgba(255,107,53,0.3);
+      --shadow: 0 8px 24px rgba(255, 107, 53, 0.2);
+      --input-bg: rgba(255, 107, 53, 0.08);
+      --input-border: rgba(255, 107, 53, 0.3);
       --input-border-focus: #ff6b35;
-      --header-bg-1: rgba(51,20,30,0.9);
-      --header-bg-2: rgba(85,30,50,0.9);
+      --header-bg-1: rgba(51, 20, 30, 0.9);
+      --header-bg-2: rgba(85, 30, 50, 0.9);
       --summary-bg: rgba(255, 107, 53, 0.2);
       --summary-bg-hover: rgba(255, 107, 53, 0.25);
       --favorites-bg: rgba(255, 107, 53, 0.15);
       --import-color: #ff6b35;
-      --search-placeholder: rgba(255,255,255,0.5);
+      --search-placeholder: rgba(255, 255, 255, 0.5);
       --bg-gradient-1: #050505;
       --bg-gradient-2: #0a0a0a;
     }
 
-    /* Custom Theme: The Library (Red) - NEW */
+    /* Custom Theme: The Library (Red) */
     body[data-custom-theme="library"] {
       --primary-color: #cc0000;
       --primary-glow: rgba(204, 0, 0, 0.5);
       --background-color: #050505;
       --card-bg: rgba(20, 20, 20, 0.8);
       --popup-bg: rgba(15, 15, 15, 0.95);
-      --shadow: 0 8px 32px rgba(204,0,0,0.25);
-      --input-bg: rgba(204,0,0,0.08);
-      --input-border: rgba(204,0,0,0.35);
+      --shadow: 0 8px 32px rgba(204, 0, 0, 0.25);
+      --input-bg: rgba(204, 0, 0, 0.08);
+      --input-border: rgba(204, 0, 0, 0.35);
       --input-border-focus: #cc0000;
-      --header-bg-1: rgba(150,0,0,0.15);
-      --header-bg-2: rgba(200,0,0,0.25);
+      --header-bg-1: rgba(150, 0, 0, 0.15);
+      --header-bg-2: rgba(200, 0, 0, 0.25);
       --summary-bg: rgba(204, 0, 0, 0.15);
       --summary-bg-hover: rgba(204, 0, 0, 0.25);
       --favorites-bg: rgba(204, 0, 0, 0.1);
       --import-color: #cc0000;
-      --search-placeholder: rgba(255,255,255,0.4);
+      --search-placeholder: rgba(255, 255, 255, 0.4);
       --bg-gradient-1: #050505;
       --bg-gradient-2: #0a0a0a;
     }
@@ -343,17 +349,17 @@ details summary:hover {
       --background-color: #050505;
       --card-bg: rgba(20, 20, 20, 0.8);
       --popup-bg: rgba(15, 15, 15, 0.95);
-      --shadow: 0 8px 32px rgba(255,140,0,0.25);
-      --input-bg: rgba(255,140,0,0.08);
-      --input-border: rgba(255,140,0,0.35);
+      --shadow: 0 8px 32px rgba(255, 140, 0, 0.25);
+      --input-bg: rgba(255, 140, 0, 0.08);
+      --input-border: rgba(255, 140, 0, 0.35);
       --input-border-focus: #ff8c00;
-      --header-bg-1: rgba(255,140,0,0.15);
-      --header-bg-2: rgba(255,100,0,0.25);
+      --header-bg-1: rgba(255, 140, 0, 0.15);
+      --header-bg-2: rgba(255, 100, 0, 0.25);
       --summary-bg: rgba(255, 140, 0, 0.15);
       --summary-bg-hover: rgba(255, 140, 0, 0.25);
       --favorites-bg: rgba(255, 140, 0, 0.1);
       --import-color: #ff8c00;
-      --search-placeholder: rgba(255,255,255,0.4);
+      --search-placeholder: rgba(255, 255, 255, 0.4);
       --bg-gradient-1: #050505;
       --bg-gradient-2: #0a0a0a;
     }
@@ -365,17 +371,17 @@ details summary:hover {
       --background-color: #050505;
       --card-bg: rgba(20, 20, 20, 0.8);
       --popup-bg: rgba(15, 15, 15, 0.95);
-      --shadow: 0 8px 32px rgba(85,37,131,0.25);
-      --input-bg: rgba(85,37,131,0.08);
-      --input-border: rgba(85,37,131,0.35);
+      --shadow: 0 8px 32px rgba(85, 37, 131, 0.25);
+      --input-bg: rgba(85, 37, 131, 0.08);
+      --input-border: rgba(85, 37, 131, 0.35);
       --input-border-focus: #552583;
-      --header-bg-1: rgba(85,37,131,0.15);
-      --header-bg-2: rgba(120,50,180,0.25);
+      --header-bg-1: rgba(85, 37, 131, 0.15);
+      --header-bg-2: rgba(120, 50, 180, 0.25);
       --summary-bg: rgba(85, 37, 131, 0.15);
       --summary-bg-hover: rgba(85, 37, 131, 0.25);
       --favorites-bg: rgba(85, 37, 131, 0.1);
       --import-color: #552583;
-      --search-placeholder: rgba(255,255,255,0.4);
+      --search-placeholder: rgba(255, 255, 255, 0.4);
       --bg-gradient-1: #050505;
       --bg-gradient-2: #0a0a0a;
     }
@@ -387,17 +393,17 @@ details summary:hover {
       --background-color: #050505;
       --card-bg: rgba(20, 20, 20, 0.8);
       --popup-bg: rgba(15, 15, 15, 0.95);
-      --shadow: 0 8px 32px rgba(230,0,0,0.25);
-      --input-bg: rgba(230,0,0,0.08);
-      --input-border: rgba(230,0,0,0.35);
+      --shadow: 0 8px 32px rgba(230, 0, 0, 0.25);
+      --input-bg: rgba(230, 0, 0, 0.08);
+      --input-border: rgba(230, 0, 0, 0.35);
       --input-border-focus: #e60000;
-      --header-bg-1: rgba(200,0,0,0.15);
-      --header-bg-2: rgba(255,50,50,0.25);
+      --header-bg-1: rgba(200, 0, 0, 0.15);
+      --header-bg-2: rgba(255, 50, 50, 0.25);
       --summary-bg: rgba(230, 0, 0, 0.15);
       --summary-bg-hover: rgba(230, 0, 0, 0.25);
       --favorites-bg: rgba(230, 0, 0, 0.1);
       --import-color: #e60000;
-      --search-placeholder: rgba(255,255,255,0.4);
+      --search-placeholder: rgba(255, 255, 255, 0.4);
       --bg-gradient-1: #050505;
       --bg-gradient-2: #0a0a0a;
     }
@@ -409,17 +415,60 @@ details summary:hover {
       --background-color: #050505;
       --card-bg: rgba(20, 20, 20, 0.8);
       --popup-bg: rgba(15, 15, 15, 0.95);
-      --shadow: 0 8px 32px rgba(102,192,244,0.25);
-      --input-bg: rgba(102,192,244,0.08);
-      --input-border: rgba(102,192,244,0.35);
+      --shadow: 0 8px 32px rgba(102, 192, 244, 0.25);
+      --input-bg: rgba(102, 192, 244, 0.08);
+      --input-border: rgba(102, 192, 244, 0.35);
       --input-border-focus: #66c0f4;
-      --header-bg-1: rgba(102,192,244,0.15);
-      --header-bg-2: rgba(80,150,200,0.25);
+      --header-bg-1: rgba(102, 192, 244, 0.15);
+      --header-bg-2: rgba(80, 150, 200, 0.25);
       --summary-bg: rgba(102, 192, 244, 0.15);
       --summary-bg-hover: rgba(102, 192, 244, 0.25);
       --favorites-bg: rgba(102, 192, 244, 0.1);
       --import-color: #66c0f4;
-      --search-placeholder: rgba(255,255,255,0.4);
+      --search-placeholder: rgba(255, 255, 255, 0.4);
+      --bg-gradient-1: #050505;
+      --bg-gradient-2: #0a0a0a;
+    }
+
+    /* Custom Theme: Securly (White/Blue) - NEW */
+    body[data-custom-theme="securly"] {
+      --primary-color: #007bff;
+      --primary-glow: rgba(0, 123, 255, 0.5);
+      --background-color: #f0f2f5;
+      --bg-gradient-1: #ffffff;
+      --bg-gradient-2: #e9ecef;
+      --text-color: #1c1e21;
+      --card-bg: rgba(255, 255, 255, 0.9);
+      --popup-bg: rgba(255, 255, 255, 0.98);
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      --header-bg-1: #007bff;
+      --header-bg-2: #0056b3;
+      --input-bg: #ffffff;
+      --input-border: #ced4da;
+      --input-border-focus: #007bff;
+      --search-placeholder: #6c757d;
+      --summary-bg: rgba(0, 123, 255, 0.1);
+      --summary-bg-hover: rgba(0, 123, 255, 0.2);
+    }
+
+    /* Custom Theme: Camzzz (Modern Purple) - NEW */
+    body[data-custom-theme="camzzz"] {
+      --primary-color: #AA00FF;
+      --primary-glow: rgba(170, 0, 255, 0.5);
+      --background-color: #050505;
+      --card-bg: rgba(20, 20, 20, 0.8);
+      --popup-bg: rgba(15, 15, 15, 0.95);
+      --shadow: 0 8px 32px rgba(170, 0, 255, 0.25);
+      --input-bg: rgba(170, 0, 255, 0.08);
+      --input-border: rgba(170, 0, 255, 0.35);
+      --input-border-focus: #AA00FF;
+      --header-bg-1: rgba(40, 0, 60, 0.9);
+      --header-bg-2: rgba(70, 0, 110, 0.9);
+      --summary-bg: rgba(170, 0, 255, 0.15);
+      --summary-bg-hover: rgba(170, 0, 255, 0.25);
+      --favorites-bg: rgba(170, 0, 255, 0.1);
+      --import-color: #AA00FF;
+      --search-placeholder: rgba(255, 255, 255, 0.4);
       --bg-gradient-1: #050505;
       --bg-gradient-2: #0a0a0a;
     }
@@ -472,19 +521,27 @@ details summary:hover {
         transform: translateY(0) translateX(0);
         opacity: 0;
       }
+
       10% {
         opacity: 0.4;
       }
+
       90% {
         opacity: 0.4;
       }
+
       100% {
         transform: translateY(-100vh) translateX(50px);
         opacity: 0;
       }
     }
 
-    h1, h2, h3, h4, h5, h6,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
     summary,
     button,
     .zone-item button,
@@ -576,7 +633,7 @@ details summary:hover {
       font-size: 1rem;
       transition: all 0.3s ease;
       backdrop-filter: blur(10px);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2), inset 0 2px 4px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
     #searchBar::placeholder {
@@ -586,7 +643,7 @@ details summary:hover {
 
     #searchBar:hover {
       border-color: var(--primary-color);
-      box-shadow: 0 4px 20px var(--primary-glow), inset 0 2px 4px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 20px var(--primary-glow), inset 0 2px 4px rgba(0, 0, 0, 0.1);
       transform: translateY(-1px);
     }
 
@@ -595,7 +652,7 @@ details summary:hover {
       border-color: var(--input-border-focus);
       box-shadow: 0 0 0 4px var(--primary-glow), 0 4px 25px var(--primary-glow);
       transform: translateY(-2px);
-      background: rgba(0,0,0,0.2);
+      background: rgba(0, 0, 0, 0.2);
     }
 
     .control-buttons button {
@@ -614,13 +671,13 @@ details summary:hover {
       transform: translateY(-1px);
     }
 
-main {
-  max-width: 1600px;
-  margin: 0 auto;
-  padding: 1.5rem;
-  position: relative;
-  z-index: 1;
-}
+    main {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
 
     .zone-container {
       display: grid;
@@ -638,7 +695,7 @@ main {
       transition: all 0.28s ease;
       display: flex;
       flex-direction: column;
-      border: 1px solid rgba(255,255,255,0.05);
+      border: 1px solid rgba(255, 255, 255, 0.05);
       backdrop-filter: blur(10px);
     }
 
@@ -688,7 +745,7 @@ main {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
     }
 
     #zoneName {
@@ -698,7 +755,7 @@ main {
 
     #zoneAuthor {
       font-size: 0.95rem;
-      color: rgba(255,255,255,0.8);
+      color: rgba(255, 255, 255, 0.8);
       text-decoration: none;
     }
 
@@ -741,7 +798,7 @@ main {
     #popupOverlay {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.65);
+      background: rgba(0, 0, 0, 0.65);
       display: none;
       align-items: center;
       justify-content: center;
@@ -752,12 +809,12 @@ main {
     .popup {
       background: var(--popup-bg);
       border-radius: 16px;
-      box-shadow: 0 12px 48px rgba(0,0,0,0.6);
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6);
       width: 90%;
       max-width: 480px;
       overflow: hidden;
       transition: all 0.5s ease;
-      border: 1px solid rgba(255,255,255,0.1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(20px);
     }
 
@@ -816,7 +873,7 @@ main {
       width: 0;
       height: 0;
       border-radius: 50%;
-      background: rgba(255,255,255,0.3);
+      background: rgba(255, 255, 255, 0.3);
       transform: translate(-50%, -50%);
       transition: width 0.5s ease, height 0.5s ease;
     }
@@ -863,7 +920,7 @@ main {
       border-radius: 12px;
       margin-bottom: 1rem;
       color: var(--text-color);
-      border: 1px solid rgba(255,255,255,0.05);
+      border: 1px solid rgba(255, 255, 255, 0.05);
       transition: all 0.3s ease;
       backdrop-filter: blur(10px);
     }
@@ -881,7 +938,7 @@ main {
       margin-top: 3rem;
       border-radius: 16px 16px 0 0;
       transition: background 0.5s ease;
-      border-top: 1px solid rgba(255,255,255,0.05);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
       backdrop-filter: blur(10px);
     }
 
@@ -893,7 +950,8 @@ main {
       margin-bottom: 1rem;
     }
 
-    .footer-links a, .footer-links label {
+    .footer-links a,
+    .footer-links label {
       color: var(--import-color);
       text-decoration: none;
       font-weight: 600;
@@ -901,7 +959,8 @@ main {
       cursor: pointer;
     }
 
-    .footer-links a:hover, .footer-links label:hover {
+    .footer-links a:hover,
+    .footer-links label:hover {
       text-shadow: 0 0 15px var(--primary-glow);
       transform: translateY(-2px);
     }
@@ -940,13 +999,13 @@ main {
 
     .color-option:hover {
       transform: scale(1.1);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
     }
 
     .color-option.active {
       border-color: white;
       transform: scale(1.05);
-      box-shadow: 0 0 20px currentColor, 0 8px 24px rgba(0,0,0,0.4);
+      box-shadow: 0 0 20px currentColor, 0 8px 24px rgba(0, 0, 0, 0.4);
     }
 
     .color-option.active::after {
@@ -958,13 +1017,24 @@ main {
       color: white;
       font-size: 2rem;
       font-weight: bold;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
     }
 
-    .color-blue { background: linear-gradient(135deg, #0000ff, #00aaff); }
-    .color-cyberpunk { background: linear-gradient(135deg, #ff00ff, #ff0099); }
-    .color-matrix { background: linear-gradient(135deg, #00cc00, #009900); }
-    .color-sunset { background: linear-gradient(135deg, #ff6b35, #ff9933); }
+    .color-blue {
+      background: linear-gradient(135deg, #0000ff, #00aaff);
+    }
+
+    .color-cyberpunk {
+      background: linear-gradient(135deg, #ff00ff, #ff0099);
+    }
+
+    .color-matrix {
+      background: linear-gradient(135deg, #00cc00, #009900);
+    }
+
+    .color-sunset {
+      background: linear-gradient(135deg, #ff6b35, #ff9933);
+    }
 
     /* Custom Theme Options */
     .theme-option {
@@ -992,13 +1062,13 @@ main {
 
     .theme-option:hover {
       transform: scale(1.1);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
     }
 
     .theme-option.active {
       border-color: white;
       transform: scale(1.05);
-      box-shadow: 0 0 20px var(--primary-color), 0 8px 24px rgba(0,0,0,0.4);
+      box-shadow: 0 0 20px var(--primary-color), 0 8px 24px rgba(0, 0, 0, 0.4);
     }
 
     .theme-option.active::after {
@@ -1009,7 +1079,7 @@ main {
       color: white;
       font-size: 1.5rem;
       font-weight: bold;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
       background: var(--primary-color);
       width: 32px;
       height: 32px;
@@ -1019,12 +1089,29 @@ main {
       justify-content: center;
     }
 
-    .theme-default { background: linear-gradient(135deg, #050505, #0a0a0a); }
-    .theme-library { background: linear-gradient(135deg, #050505, #cc0000); }
-    .theme-elias { background: linear-gradient(135deg, #050505, #ff8c00); }
-    .theme-lebron { background: linear-gradient(135deg, #050505, #552583); }
-    .theme-kirk { background: linear-gradient(135deg, #050505, #e60000); }
-    .theme-steam { background: linear-gradient(135deg, #050505, #66c0f4); }
+    .theme-default {
+      background: linear-gradient(135deg, #050505, #0a0a0a);
+    }
+
+    .theme-library {
+      background: linear-gradient(135deg, #050505, #cc0000);
+    }
+
+    .theme-elias {
+      background: linear-gradient(135deg, #050505, #ff8c00);
+    }
+
+    .theme-lebron {
+      background: linear-gradient(135deg, #050505, #552583);
+    }
+
+    .theme-kirk {
+      background: linear-gradient(135deg, #050505, #e60000);
+    }
+
+    .theme-steam {
+      background: linear-gradient(135deg, #050505, #66c0f4);
+    }
 
     /* Settings Tabs */
     .settings-tabs {
@@ -1065,70 +1152,80 @@ main {
     }
 
     @media (max-width: 768px) {
-      .header-content { flex-direction: column; gap: 1rem; }
-      .search-container { width: 100%; }
-      .zone-container { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; }
-      .zone-controls { flex-direction: column; gap: 12px; }
-      .zone-controls button { width: 100%; }
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .search-container {
+        width: 100%;
+      }
+
+      .zone-container {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 20px;
+      }
+
+      .zone-controls {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .zone-controls button {
+        width: 100%;
+      }
     }
   </style>
 </head>
 
 <body data-theme="default">
 
-<!-- Animated Background Particles -->
-<div class="bg-particles" id="bgParticles"></div>
+  <div class="bg-particles" id="bgParticles"></div>
 
-<header>
-  <div class="header-content">
-    <!-- Logo -->
-    <div class="logo">
-      <img src="https://codehs.com/uploads/84799a0bb8e09668879b73acd5e7abaa" alt="Logo" class="logo-img" id="headerLogo">
-      <span id="headerText">Story Network GN Math</span>
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <img src="https://codehs.com/uploads/84799a0bb8e09668879b73acd5e7abaa" alt="Logo" class="logo-img" id="headerLogo">
+        <span id="headerText">Story Network GN Math</span>
+      </div>
+
+      <div class="search-container">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchBar" placeholder="Search Games..." oninput="filterZones()">
+      </div>
+
+      <div class="control-buttons">
+        <button class="control-button" onclick="window.open('https://docs.google.com/document/d/1ip8XBOUzU7pzqmPxc2T8YJKHfbYwn6ZmFIPNd7ta708/edit?tab=t.pbpbt3le3921', '_blank')">
+          📚 Library
+        </button>
+        <button class="control-button" id="settings">⚙️ Settings</button>
+      </div>
     </div>
-
-    <!-- Search Bar -->
-    <div class="search-container">
-      <span class="search-icon">🔍</span>
-      <input type="text" id="searchBar" placeholder="Search Games..." oninput="filterZones()">
-    </div>
-
-    <!-- Control Buttons: Library + Settings -->
-    <div class="control-buttons">
-      <button class="control-button" onclick="window.open('https://docs.google.com/document/d/1ip8XBOUzU7pzqmPxc2T8YJKHfbYwn6ZmFIPNd7ta708/edit?tab=t.pbpbt3le3921', '_blank')">
-        📚 Library
-      </button>
-      <button class="control-button" id="settings">⚙️ Settings</button>
-    </div>
-  </div>
-</header>
-
-
-
+  </header>
 
   <main>
 
     <details id="favoriteZonesWrapper" open>
-  <summary>Favorites</summary>
-  <div id="favoriteZonesList" class="zone-container">
-    <p style="text-align:center; padding:2rem;">No favorites yet.</p>
-  </div>
-</details>
+      <summary>Favorites</summary>
+      <div id="favoriteZonesList" class="zone-container">
+        <p style="text-align:center; padding:2rem;">No favorites yet.</p>
+      </div>
+    </details>
 
-<hr style="margin:2rem 0; border-color:rgba(255,255,255,0.08);">
+    <hr style="margin:2rem 0; border-color:rgba(255,255,255,0.08);">
 
-    
-<details id="recentZonesWrapper" open>
-  <summary>
-    <span class="summary-text">Recently Played</span>
-    <button class="clear-recent" onclick="clearRecent(); event.stopPropagation();">
-      Clear Recent
-    </button>
-  </summary>
-  <div id="recentZonesList" class="zone-container">
-    <p style="text-align:center; padding:2rem;">No recently played games.</p>
-  </div>
-</details>
+
+    <details id="recentZonesWrapper" open>
+      <summary>
+        <span class="summary-text">Recently Played</span>
+        <button class="clear-recent" onclick="clearRecent(); event.stopPropagation();">
+          Clear Recent
+        </button>
+      </summary>
+      <div id="recentZonesList" class="zone-container">
+        <p style="text-align:center; padding:2rem;">No recently played games.</p>
+      </div>
+    </details>
 
 
 
@@ -1172,12 +1269,6 @@ main {
       </div>
     </div>
   </div>
-
-  <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-client="ca-pub-5521219086088837"
-    data-ad-slot="5549138288" data-ad-format="auto" data-full-width-responsive="true"></ins>
-  <script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
 
   <footer>
     <div class="footer-links">
@@ -1226,9 +1317,17 @@ main {
       steam: {
         name: "HTML Steam",
         logo: "https://codehs.com/uploads/91d3dfec9bcbafba9a912a9b1058b5c2"
+      },
+      // --- NEW THEMES ADDED HERE ---
+      securly: {
+        name: "We Hate Securly",
+        logo: "https://codehs.com/uploads/3db91fabcc5ff2565afaa29a6e9ca71d"
+      },
+      camzzz: {
+        name: "Camzzz GN Math",
+        logo: "https://codehs.com/uploads/a9a10c007fe8fccd20732445bd0a74ed"
       }
     };
-
     // Background Particles
     function createParticles() {
       const particlesContainer = document.getElementById('bgParticles');
@@ -1249,17 +1348,14 @@ main {
       document.body.removeAttribute('data-custom-theme');
       // Set the color theme
       document.body.setAttribute('data-theme', theme);
-      
       // Save to localStorage
       localStorage.setItem('theme', theme);
       localStorage.removeItem('customTheme');
-      
       // Update header to default
       updateHeader('default');
-      
+
       // Update UI
       updateThemeUI();
-      
       // Recreate particles with new color
       createParticles();
     }
@@ -1269,17 +1365,14 @@ main {
       document.body.removeAttribute('data-theme');
       // Set custom theme
       document.body.setAttribute('data-custom-theme', customTheme);
-      
       // Save to localStorage
       localStorage.setItem('customTheme', customTheme);
       localStorage.removeItem('theme');
-      
       // Update header based on custom theme
       updateHeader(customTheme);
-      
       // Update UI
       updateThemeUI();
-      
+
       // Recreate particles with new color
       createParticles();
     }
@@ -1289,7 +1382,7 @@ main {
       const config = themeConfig[themeKey] || themeConfig.default;
       const logoImg = document.getElementById('headerLogo');
       const headerText = document.getElementById('headerText');
-      
+
       if (logoImg) {
         logoImg.src = config.logo;
         logoImg.alt = config.name + " Logo";
@@ -1304,28 +1397,27 @@ main {
     function updateThemeUI() {
       const currentTheme = localStorage.getItem('theme') || 'default';
       const currentCustomTheme = localStorage.getItem('customTheme');
-      
+
       // Update color options
       document.querySelectorAll('.color-option').forEach(btn => {
         btn.classList.remove('active');
         const themeName = btn.classList.contains('color-blue') ? 'default' :
-                         btn.classList.contains('color-cyberpunk') ? 'cyberpunk' :
-                         btn.classList.contains('color-matrix') ? 'matrix' :
-                         btn.classList.contains('color-sunset') ? 'sunset' : '';
+          btn.classList.contains('color-cyberpunk') ? 'cyberpunk' :
+          btn.classList.contains('color-matrix') ? 'matrix' :
+          btn.classList.contains('color-sunset') ? 'sunset' : '';
         if (!currentCustomTheme && currentTheme === themeName) {
           btn.classList.add('active');
         }
       });
-      
       // Update custom theme options
       document.querySelectorAll('.theme-option').forEach(btn => {
         btn.classList.remove('active');
         const customName = btn.classList.contains('theme-default') ? 'default' :
-                          btn.classList.contains('theme-library') ? 'library' :
-                          btn.classList.contains('theme-elias') ? 'elias' :
-                          btn.classList.contains('theme-lebron') ? 'lebron' :
-                          btn.classList.contains('theme-kirk') ? 'kirk' :
-                          btn.classList.contains('theme-steam') ? 'steam' : '';
+          btn.classList.contains('theme-library') ? 'library' :
+          btn.classList.contains('theme-elias') ? 'elias' :
+          btn.classList.contains('theme-lebron') ? 'lebron' :
+          btn.classList.contains('theme-kirk') ? 'kirk' :
+          btn.classList.contains('theme-steam') ? 'steam' : '';
         if (currentCustomTheme === customName || (!currentCustomTheme && customName === 'default' && currentTheme === 'default')) {
           btn.classList.add('active');
         }
@@ -1336,7 +1428,7 @@ main {
     function loadSavedTheme() {
       const savedTheme = localStorage.getItem('theme');
       const savedCustomTheme = localStorage.getItem('customTheme');
-      
+
       if (savedCustomTheme) {
         document.body.setAttribute('data-custom-theme', savedCustomTheme);
         updateHeader(savedCustomTheme);
@@ -1347,7 +1439,7 @@ main {
         document.body.setAttribute('data-theme', 'default');
         updateHeader('default');
       }
-      
+
       updateThemeUI();
     }
 
@@ -1359,70 +1451,81 @@ main {
     }
 
     function removeFromRecentlyPlayed(id) {
-  let recents = JSON.parse(localStorage.getItem("recentZones") || "[]");
-  recents = recents.filter(x => x !== id);
-  localStorage.setItem("recentZones", JSON.stringify(recents));
-  updateRecentlyPlayed();
-}
+      let recents = JSON.parse(localStorage.getItem("recentZones") || "[]");
+      recents = recents.filter(x => x !== id);
+      localStorage.setItem("recentZones", JSON.stringify(recents));
+      updateRecentlyPlayed();
+    }
 
-function clearRecent() {
-  if (confirm('Clear all recent games?')) {
-    localStorage.removeItem('recentZones');
-    updateRecentlyPlayed();
-  }
-}
+    function clearRecent() {
+      if (confirm('Clear all recent games?')) {
+        localStorage.removeItem('recentZones');
+        updateRecentlyPlayed();
+      }
+    }
 
-    
-function updateRecentlyPlayed() {
 
-  const recents = JSON.parse(localStorage.getItem("recentZones") || "[]");
-  const list = document.getElementById("recentZonesList");
-  if (!list) return;
+    function updateRecentlyPlayed() {
 
-  list.innerHTML = "";
+      const recents = JSON.parse(localStorage.getItem("recentZones") || "[]");
+      const list = document.getElementById("recentZonesList");
+      if (!list) return;
 
-  if (recents.length === 0) {
-    list.innerHTML = '<p style="text-align:center; padding:2rem;">No recently played games</p>';
-    return;
-  }
+      list.innerHTML = "";
 
-  recents.forEach(id => {
+      if (recents.length === 0) {
+        list.innerHTML = '<p style="text-align:center; padding:2rem;">No recently played games</p>';
+        return;
+      }
 
-    const zone = zones.find(z => z.id == id);
-    if (!zone) return;
+      recents.forEach(id => {
 
-    const card = createZoneCard(zone, "recent");
+        const zone = zones.find(z => z.id == id);
+        if (!zone) return;
 
-    const remove = document.createElement("div");
-    remove.className = "recent-remove";
-    remove.innerHTML = `
+        const card = createZoneCard(zone, "recent");
+
+        const remove = document.createElement("div");
+        remove.className = "recent-remove";
+        remove.innerHTML = `
       <svg viewBox="0 0 24 24">
         <line x1="6" y1="6" x2="18" y2="18"/>
         <line x1="18" y1="6" x2="6" y2="18"/>
       </svg>
     `;
 
-    remove.onclick = (e) => {
-      e.stopPropagation();
-      card.style.opacity = "0";
-      card.style.transform = "scale(0.8)";
-      setTimeout(() => {
-        removeFromRecentlyPlayed(id);
-      }, 200);
-    };
+        remove.onclick = (e) => {
+          e.stopPropagation();
+          card.style.opacity = "0";
+          card.style.transform = "scale(0.8)";
+          setTimeout(() => {
+            removeFromRecentlyPlayed(id);
+          }, 200);
+        };
 
-    card.appendChild(remove);
-    list.appendChild(card);
-  });
-
-}
+        card.appendChild(remove);
+        list.appendChild(card);
+      });
+    }
 
 
     async function listZones() {
       try {
         const response = await fetch(zonesURL + "?t=" + Date.now());
         const json = await response.json();
-        zones = json;
+
+        // --- MANUALLY ADD REQUESTED GAMES HERE ---
+        const pinnedGames = [
+          { id: 'lib', name: 'The Library:', author: 'Camzzz', url: 'https://docs.google.com/document/d/1ip8XBOUzU7pzqmPxc2T8YJKHfbYwn6ZmFIPNd7ta708/edit?tab=t.jvhiydqpf78o', cover: 'https://codehs.com/uploads/42b9587a6dd73b104e8ef00959c00eda' },
+          { id: 'raz', name: 'raz.launcher', author: 'Camzzz', url: 'https://webmaker.app/create/T3baO7VwpZ?layout=4/', cover: 'https://codehs.com/uploads/657ae227967f2a74ff60938003ba5e8d' },
+          { id: 'sgc', name: 'Story Network Google Classroom', author: 'Camzzz', url: 'https://classroom.google.com/c/ODQyMTAyMTUwMzI1?cjc=zopuekrn', cover: 'https://codehs.com/uploads/84799a0bb8e09668879b73acd5e7abaa' },
+          { id: 'securly', name: 'Securly Checker', author: 'securly (we hate them)', url: 'https://securly.status.io/', cover: 'https://codehs.com/uploads/0994a90a467c82d4adf741341f5dc33a' },
+          { id: 'gtag', name: 'Gtag Color Converter', author: 'Camzzz', url: 'https://camzzz-vrgt.github.io/GTAG-COLOR_CONVERTER/?scrlcbp=.', cover: 'https://codehs.com/uploads/a5dfe40f2c16d239feab38ed6d4c7bcc' }
+        ];
+
+        // Combine manual games + fetched JSON
+        zones = [...pinnedGames, ...json];
+
         await fetchPopularity();
         sortZones();
         updateRecentlyPlayed();
@@ -1499,95 +1602,103 @@ function updateRecentlyPlayed() {
     }
 
     function sortZones() {
-      zones.sort((a, b) => a.name.localeCompare(b.name));
+      // Logic to keep the pinned games at the top
+      const pinnedIds = ['lib', 'raz', 'sgc', 'securly', 'gtag'];
+      const pinned = zones.filter(z => pinnedIds.includes(z.id));
+      const others = zones.filter(z => !pinnedIds.includes(z.id));
+
+      others.sort((a, b) => a.name.localeCompare(b.name));
+      zones = [...pinned, ...others];
+
       displayZones(zones);
       updateRecentlyPlayed();
       updateFavorites();
     }
 
-function displayZones(zonesToShow) {
-  container.innerHTML = "";
+    function displayZones(zonesToShow) {
+      container.innerHTML = "";
+      zonesToShow.forEach(file => {
+        const card = createZoneCard(file, "normal");
+        container.appendChild(card);
+      });
+      if (container.innerHTML === "") {
+        container.innerHTML = "No zones found.";
+      } else {
+        document.getElementById("allZonesWrapper")
+          .querySelector("summary")
+          .textContent = `All Games (${zonesToShow.length})`;
+      }
+    }
 
-zonesToShow.forEach(file => {
-  const card = createZoneCard(file, "normal");
-  container.appendChild(card);
-});
+    function createZoneCard(file, mode = "normal") {
 
+      const zoneItem = document.createElement("div");
+      zoneItem.className = "zone-item";
+      zoneItem.onclick = () => openZone(file);
+      /* ---------- STAR (NOT FOR RECENTS) ---------- */
+      if (mode !== "recent") {
 
-  if (container.innerHTML === "") {
-    container.innerHTML = "No zones found.";
-  } else {
-    document.getElementById("allZonesWrapper")
-      .querySelector("summary")
-      .textContent = `All Games (${zonesToShow.length})`;
-  }
-}
-
-function createZoneCard(file, mode = "normal") {
-
-  const zoneItem = document.createElement("div");
-  zoneItem.className = "zone-item";
-  zoneItem.onclick = () => openZone(file);
-
-  /* ---------- STAR (NOT FOR RECENTS) ---------- */
-  if (mode !== "recent") {
-
-    const star = document.createElement("div");
-    star.className = "favorite-star";
-    star.innerHTML = `
+        const star = document.createElement("div");
+        star.className = "favorite-star";
+        star.innerHTML = `
       <svg viewBox="0 0 24 24">
         <polygon points="12 2 15 9 22 9 17 14 19 22 12 18 5 22 7 14 2 9 9 9"></polygon>
       </svg>
     `;
+        if (getFavorites().includes(file.id)) {
+          star.classList.add("active");
+        }
 
-    if (getFavorites().includes(file.id)) {
-      star.classList.add("active");
-    }
+        star.onclick = (e) => {
+          e.stopPropagation();
+          toggleFavorite(file.id, star);
+        };
 
-    star.onclick = (e) => {
-      e.stopPropagation();
-      toggleFavorite(file.id, star);
-    };
-
-    zoneItem.appendChild(star);
-  }
-
-  /* ---------- IMAGE ---------- */
-  const img = document.createElement("img");
-  img.dataset.src = file.cover
-    .replace("{COVER_URL}", coverURL)
-    .replace("{HTML_URL}", htmlURL);
-
-  img.alt = file.name;
-  img.loading = "lazy";
-  img.className = "lazy-zone-img";
-
-  /* ---------- BUTTON ---------- */
-  const btn = document.createElement("button");
-  btn.textContent = file.name;
-  btn.onclick = (e) => {
-    e.stopPropagation();
-    openZone(file);
-  };
-
-  zoneItem.appendChild(img);
-  zoneItem.appendChild(btn);
-
-  /* ---------- LAZY LOAD ---------- */
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.src = entry.target.dataset.src;
-        entry.target.classList.remove("lazy-zone-img");
-        obs.unobserve(entry.target);
+        zoneItem.appendChild(star);
       }
-    });
-  }, { rootMargin: "120px", threshold: 0.1 });
 
-  observer.observe(img);
+      /* ---------- IMAGE ---------- */
+      const img = document.createElement("img");
+      // Handle custom pinned game covers vs external covers
+      if (file.cover && file.cover.startsWith("http")) {
+        img.dataset.src = file.cover;
+      } else {
+        img.dataset.src = file.cover
+          .replace("{COVER_URL}", coverURL)
+          .replace("{HTML_URL}", htmlURL);
+      }
 
-  return zoneItem;
-}
+      img.alt = file.name;
+      img.loading = "lazy";
+      img.className = "lazy-zone-img";
+
+      /* ---------- BUTTON ---------- */
+      const btn = document.createElement("button");
+      btn.textContent = file.name;
+      btn.onclick = (e) => {
+        e.stopPropagation();
+        openZone(file);
+      };
+
+      zoneItem.appendChild(img);
+      zoneItem.appendChild(btn);
+      /* ---------- LAZY LOAD ---------- */
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.src = entry.target.dataset.src;
+            entry.target.classList.remove("lazy-zone-img");
+            obs.unobserve(entry.target);
+          }
+        });
+      }, {
+        rootMargin: "120px",
+        threshold: 0.1
+      });
+      observer.observe(img);
+
+      return zoneItem;
+    }
 
 
 
@@ -1599,7 +1710,6 @@ function createZoneCard(file, mode = "normal") {
 
     function openZone(file) {
       recordRecent(file.id);
-
       if (file.url.startsWith("http")) {
         window.open(file.url, "_blank");
       } else {
@@ -1624,6 +1734,7 @@ function createZoneCard(file, mode = "normal") {
             zoneFrame.style.opacity = "1";
             zoneFrame.style.pointerEvents = "auto";
             document.getElementById("zoneLoading").style.display = "none";
+
             document.getElementById('zoneName').textContent = file.name;
             document.getElementById('zoneId').textContent = file.id;
             document.getElementById('zoneAuthor').textContent = "by " + file.author;
@@ -1665,11 +1776,14 @@ function createZoneCard(file, mode = "normal") {
       fetch(zone.url.replace("{HTML_URL}", htmlURL) + "?t=" + Date.now())
         .then(res => res.text())
         .then(text => {
-          const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+          const blob = new Blob([text], {
+            type: "text/plain;charset=utf-8"
+          });
           const url = URL.createObjectURL(blob);
           const a = document.createElement('a');
           a.href = url;
           a.download = zone.name + ".html";
+
           a.click();
           URL.revokeObjectURL(url);
         });
@@ -1686,7 +1800,9 @@ function createZoneCard(file, mode = "normal") {
     function saveData() {
       let data = JSON.stringify(localStorage) + "\n\n|\n\n" + document.cookie;
       const link = document.createElement("a");
-      link.href = URL.createObjectURL(new Blob([data], { type: "text/plain" }));
+      link.href = URL.createObjectURL(new Blob([data], {
+        type: "text/plain"
+      }));
       link.download = `${Date.now()}.data`;
       link.click();
     }
@@ -1718,7 +1834,8 @@ function createZoneCard(file, mode = "normal") {
     }
 
     function cloakName(string) {
-      document.title = string.trim() || "Home";
+      document.title = string.trim() ||
+        "Home";
     }
 
     function tabCloak() {
@@ -1737,7 +1854,7 @@ function createZoneCard(file, mode = "normal") {
       closePopup();
       const currentTheme = localStorage.getItem('theme') || 'default';
       const currentCustomTheme = localStorage.getItem('customTheme');
-      
+
       document.getElementById('popupTitle').textContent = "Appearance";
       document.getElementById('popupBody').innerHTML = `
         <div class="settings-tabs">
@@ -1776,6 +1893,12 @@ function createZoneCard(file, mode = "normal") {
             <div class="theme-option theme-steam ${currentCustomTheme === 'steam' ? 'active' : ''}" onclick="setCustomTheme('steam');" title="Steam">
               <img src="https://codehs.com/uploads/91d3dfec9bcbafba9a912a9b1058b5c2" alt="Steam">
             </div>
+            <div class="theme-option ${currentCustomTheme === 'securly' ? 'active' : ''}" style="background:#007bff;" onclick="setCustomTheme('securly');" title="Securly">
+              <img src="https://codehs.com/uploads/3db91fabcc5ff2565afaa29a6e9ca71d" alt="Securly">
+            </div>
+            <div class="theme-option ${currentCustomTheme === 'camzzz' ? 'active' : ''}" style="background:#AA00FF;" onclick="setCustomTheme('camzzz');" title="Camzzz">
+              <img src="https://codehs.com/uploads/a9a10c007fe8fccd20732445bd0a74ed" alt="Camzzz">
+            </div>
           </div>
           <p style="margin-top: 1.5rem; font-size: 0.9rem; opacity: 0.7; color: var(--text-color);">Suggest New Themes in the Library!</p>
         </div>
@@ -1787,7 +1910,7 @@ function createZoneCard(file, mode = "normal") {
       // Update tab buttons
       document.querySelectorAll('.settings-tab').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      
+
       // Update panels
       document.querySelectorAll('.settings-panel').forEach(panel => panel.classList.remove('active'));
       document.getElementById(tab + '-panel').classList.add('active');
@@ -1826,65 +1949,64 @@ function createZoneCard(file, mode = "normal") {
     function closePopup() {
       document.getElementById('popupOverlay').style.display = "none";
     }
-function getFavorites() {
-  return JSON.parse(localStorage.getItem("favorites") || "[]");
-}
 
-function saveFavorites(arr) {
-  localStorage.setItem("favorites", JSON.stringify(arr));
-}
+    function getFavorites() {
+      return JSON.parse(localStorage.getItem("favorites") || "[]");
+    }
 
-function toggleFavorite(id, starEl) {
-  let favs = getFavorites();
+    function saveFavorites(arr) {
+      localStorage.setItem("favorites", JSON.stringify(arr));
+    }
 
-  if (favs.includes(id)) {
-    favs = favs.filter(x => x !== id);
-    starEl.classList.remove("active");
-  } else {
-    favs.push(id);
-    starEl.classList.add("active");
-    spawnParticles(starEl);
-  }
+    function toggleFavorite(id, starEl) {
+      let favs = getFavorites();
 
-  saveFavorites(favs);
-  updateFavorites();
-}
+      if (favs.includes(id)) {
+        favs = favs.filter(x => x !== id);
+        starEl.classList.remove("active");
+      } else {
+        favs.push(id);
+        starEl.classList.add("active");
+        spawnParticles(starEl);
+      }
 
-function spawnParticles(star) {
-  for (let i = 0; i < 10; i++) {
-    const p = document.createElement("div");
-    p.className = "star-particle";
-    p.style.left = "50%";
-    p.style.top = "50%";
-    p.style.setProperty("--x", `${(Math.random()-0.5)*60}px`);
-    p.style.setProperty("--y", `${(Math.random()-0.5)*60}px`);
-    star.appendChild(p);
-    setTimeout(() => p.remove(), 600);
-  }
-}
+      saveFavorites(favs);
+      updateFavorites();
+    }
 
-function updateFavorites() {
-  const list = document.getElementById("favoriteZonesList");
-  const favs = getFavorites();
-  list.innerHTML = "";
+    function spawnParticles(star) {
+      for (let i = 0; i < 10; i++) {
+        const p = document.createElement("div");
+        p.className = "star-particle";
+        p.style.left = "50%";
+        p.style.top = "50%";
+        p.style.setProperty("--x", `${(Math.random()-0.5)*60}px`);
+        p.style.setProperty("--y", `${(Math.random()-0.5)*60}px`);
+        star.appendChild(p);
+        setTimeout(() => p.remove(), 600);
+      }
+    }
 
-  if (favs.length === 0) {
-    list.innerHTML = '<p style="text-align:center; padding:2rem;">No favorites yet.</p>';
-    return;
-  }
+    function updateFavorites() {
+      const list = document.getElementById("favoriteZonesList");
+      const favs = getFavorites();
+      list.innerHTML = "";
+      if (favs.length === 0) {
+        list.innerHTML = '<p style="text-align:center; padding:2rem;">No favorites yet.</p>';
+        return;
+      }
 
-  favs.forEach(id => {
-    const zone = zones.find(z => z.id == id);
-    if (!zone) return;
+      favs.forEach(id => {
+        const zone = zones.find(z => z.id == id);
+        if (!zone) return;
 
-    const item = createZoneCard(zone, "favorite");
-    list.appendChild(item);
-  });
-
-  document.getElementById("favoriteZonesWrapper")
-    .querySelector("summary")
-    .innerHTML = `Favorites (${favs.length})`;
-}
+        const item = createZoneCard(zone, "favorite");
+        list.appendChild(item);
+      });
+      document.getElementById("favoriteZonesWrapper")
+        .querySelector("summary")
+        .innerHTML = `Favorites (${favs.length})`;
+    }
 
     // Initialize
     loadSavedTheme(); // Load theme before creating particles
@@ -1892,6 +2014,7 @@ function updateFavorites() {
     listZones();
 
     const schoolList = ["deledao", "goguardian", "lightspeed", "linewize", "securly", ".edu/"];
+
     function isBlockedDomain(url) {
       const domain = new URL(url, location.origin).hostname + "/";
       return schoolList.some(s => domain.includes(s));
@@ -1909,7 +2032,10 @@ function updateFavorites() {
       return originalOpen.apply(this, arguments);
     };
 
-    HTMLCanvasElement.prototype.toDataURL = function() { return ""; };
+    HTMLCanvasElement.prototype.toDataURL = function() {
+      return "";
+    };
   </script>
 </body>
+
 </html>
