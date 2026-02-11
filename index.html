@@ -1392,21 +1392,24 @@
       createParticles();
     }
 
-    // Update header logo and text
-    function updateHeader(themeKey) {
-      const config = themeConfig[themeKey] || themeConfig.default;
-      const logoImg = document.getElementById('headerLogo');
-      const headerText = document.getElementById('headerText');
+// Update header logo and text
+function updateHeader(themeKey) {
+  const config = themeConfig[themeKey] || themeConfig.default;
+  const logoImg = document.getElementById('headerLogo');
+  const headerText = document.getElementById('headerText');
 
-      if (logoImg) {
-        logoImg.src = config.logo;
-        logoImg.alt = config.name + " Logo";
-      }
-      if (headerText) {
-        headerText.textContent = config.name;
-      }
-      document.title = config.name;
-    }
+  if (logoImg) {
+    logoImg.src = config.logo;
+    logoImg.alt = config.name + " Logo";
+  }
+  if (headerText) {
+    headerText.textContent = config.name;
+  }
+  document.title = config.name;
+
+  // ADD THIS LINE TO CHANGE THE FAVICON:
+  cloakIcon(config.logo); 
+}
 
     // Update UI to reflect current theme
     function updateThemeUI() {
