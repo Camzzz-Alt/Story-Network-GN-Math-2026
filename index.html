@@ -417,17 +417,21 @@
       --bg-gradient-1: #050505;
       --bg-gradient-2: #0a0a0a;
     }
-	/* Custom Theme: Epstein (Grey, Black, and White) */
+
+    /* Custom Theme: Epstein (Grey, Black, and White) */
     body[data-custom-theme="epstein"] {
-      --primary-color: #666666; /* Grey */
+      --primary-color: #666666;
+      /* Grey */
       --primary-glow: rgba(102, 102, 102, 0.5);
-      --background-color: #000000; /* Black */
+      --background-color: #000000;
+      /* Black */
       --card-bg: rgba(30, 30, 30, 0.8);
       --popup-bg: rgba(10, 10, 10, 0.95);
       --shadow: 0 8px 32px rgba(255, 255, 255, 0.1);
       --input-bg: rgba(255, 255, 255, 0.05);
       --input-border: rgba(255, 255, 255, 0.2);
-      --input-border-focus: #ffffff; /* White */
+      --input-border-focus: #ffffff;
+      /* White */
       --header-bg-1: rgba(20, 20, 20, 0.95);
       --header-bg-2: rgba(0, 0, 0, 0.95);
       --summary-bg: rgba(102, 102, 102, 0.2);
@@ -438,7 +442,8 @@
       --bg-gradient-1: #000000;
       --bg-gradient-2: #1a1a1a;
     }
-    /* Custom Theme: Securly (White/Blue) - NEW */
+
+    /* Custom Theme: Securly (White/Blue) */
     body[data-custom-theme="securly"] {
       --primary-color: #007bff;
       --primary-glow: rgba(0, 123, 255, 0.5);
@@ -458,28 +463,35 @@
       --summary-bg: rgba(0, 123, 255, 0.1);
       --summary-bg-hover: rgba(0, 123, 255, 0.2);
     }
-/* Custom Theme: IXL Style (Green/Cyan/Yellow) */
-body[data-custom-theme="ixl"] {
-  --primary-color: #4eb230; /* IXL Green */
-  --primary-glow: rgba(78, 178, 48, 0.5);
-  --background-color: #050505;
-  --card-bg: rgba(20, 20, 20, 0.8);
-  --popup-bg: rgba(15, 15, 15, 0.95);
-  --shadow: 0 8px 32px rgba(78, 178, 48, 0.25);
-  --input-bg: rgba(78, 178, 48, 0.08);
-  --input-border: rgba(0, 122, 204, 0.35); /* Cyan border */
-  --input-border-focus: #007acc; /* Cyan focus */
-  --header-bg-1: rgba(45, 105, 30, 0.9);
-  --header-bg-2: rgba(78, 178, 48, 0.9);
-  --summary-bg: rgba(0, 122, 204, 0.15); /* Cyan summaries */
-  --summary-bg-hover: rgba(0, 122, 204, 0.25);
-  --favorites-bg: rgba(255, 199, 44, 0.15); /* Yellow favorites */
-  --import-color: #4eb230;
-  --search-placeholder: rgba(255, 255, 255, 0.4);
-  --bg-gradient-1: #050505;
-  --bg-gradient-2: #0a0a0a;
-}
-    /* Custom Theme: Camzzz (Modern Purple) - NEW */
+
+    /* Custom Theme: IXL Style (Green/Cyan/Yellow) */
+    body[data-custom-theme="ixl"] {
+      --primary-color: #4eb230;
+      /* IXL Green */
+      --primary-glow: rgba(78, 178, 48, 0.5);
+      --background-color: #050505;
+      --card-bg: rgba(20, 20, 20, 0.8);
+      --popup-bg: rgba(15, 15, 15, 0.95);
+      --shadow: 0 8px 32px rgba(78, 178, 48, 0.25);
+      --input-bg: rgba(78, 178, 48, 0.08);
+      --input-border: rgba(0, 122, 204, 0.35);
+      /* Cyan border */
+      --input-border-focus: #007acc;
+      /* Cyan focus */
+      --header-bg-1: rgba(45, 105, 30, 0.9);
+      --header-bg-2: rgba(78, 178, 48, 0.9);
+      --summary-bg: rgba(0, 122, 204, 0.15);
+      /* Cyan summaries */
+      --summary-bg-hover: rgba(0, 122, 204, 0.25);
+      --favorites-bg: rgba(255, 199, 44, 0.15);
+      /* Yellow favorites */
+      --import-color: #4eb230;
+      --search-placeholder: rgba(255, 255, 255, 0.4);
+      --bg-gradient-1: #050505;
+      --bg-gradient-2: #0a0a0a;
+    }
+
+    /* Custom Theme: Camzzz (Modern Purple) */
     body[data-custom-theme="camzzz"] {
       --primary-color: #AA00FF;
       --primary-glow: rgba(170, 0, 255, 0.5);
@@ -875,6 +887,8 @@ body[data-custom-theme="ixl"] {
       font-size: 1.05rem;
       line-height: 1.5;
       color: var(--text-color);
+      max-height: 70vh;
+      overflow-y: auto;
     }
 
     #popupBody button {
@@ -920,19 +934,22 @@ body[data-custom-theme="ixl"] {
       transform: translateY(0);
     }
 
-    #popupBody input {
+    #popupBody input,
+    #popupBody textarea {
       width: 100%;
       padding: 0.8rem 1.2rem;
       margin: 0.6rem 0 1.2rem;
       border: 1px solid var(--input-border);
-      border-radius: 9999px;
+      border-radius: 12px;
       background: var(--input-bg);
       color: var(--text-color);
       font-size: 1rem;
       transition: all 0.3s ease;
+      font-family: monospace;
     }
 
-    #popupBody input:focus {
+    #popupBody input:focus,
+    #popupBody textarea:focus {
       outline: none;
       border-color: var(--input-border-focus);
       box-shadow: 0 0 0 3px var(--primary-glow), 0 0 20px var(--primary-glow);
@@ -1064,6 +1081,27 @@ body[data-custom-theme="ixl"] {
       background: linear-gradient(135deg, #ff6b35, #ff9933);
     }
 
+    /* Input type color override */
+    .color-picker-input {
+      width: 100%;
+      height: 60px;
+      cursor: pointer;
+      border: none;
+      padding: 0;
+      background: none;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    
+    .color-picker-input::-webkit-color-swatch-wrapper {
+      padding: 0;
+    }
+    
+    .color-picker-input::-webkit-color-swatch {
+      border: none;
+      border-radius: 12px;
+    }
+
     /* Custom Theme Options */
     .theme-option {
       width: 100%;
@@ -1141,7 +1179,7 @@ body[data-custom-theme="ixl"] {
       background: linear-gradient(135deg, #050505, #66c0f4);
     }
     .theme-epstein { 
-      background: linear-gradient(135deg, #050505, #666666); 
+      background: linear-gradient(135deg, #050505, #666666);
     }
 
     /* Settings Tabs */
@@ -1150,6 +1188,7 @@ body[data-custom-theme="ixl"] {
       gap: 1rem;
       margin-bottom: 1.5rem;
       border-bottom: 2px solid var(--input-border);
+      overflow-x: auto;
     }
 
     .settings-tab {
@@ -1163,6 +1202,7 @@ body[data-custom-theme="ixl"] {
       transition: all 0.3s ease;
       border-bottom: 3px solid transparent;
       margin-bottom: -2px;
+      white-space: nowrap;
     }
 
     .settings-tab:hover {
@@ -1180,6 +1220,18 @@ body[data-custom-theme="ixl"] {
 
     .settings-panel.active {
       display: block;
+    }
+    
+    .code-export-box {
+        background: rgba(0,0,0,0.5);
+        color: #00ff00;
+        font-family: 'Courier New', monospace;
+        padding: 1rem;
+        border-radius: 8px;
+        width: 100%;
+        min-height: 200px;
+        border: 1px solid #333;
+        resize: vertical;
     }
 
     @media (max-width: 768px) {
@@ -1226,6 +1278,7 @@ body[data-custom-theme="ixl"] {
       </div>
 
       <div class="control-buttons">
+   
         <button class="control-button" onclick="window.open('https://docs.google.com/document/d/1ip8XBOUzU7pzqmPxc2T8YJKHfbYwn6ZmFIPNd7ta708/edit?tab=t.pbpbt3le3921', '_blank')">
           📚 Library
         </button>
@@ -1239,28 +1292,33 @@ body[data-custom-theme="ixl"] {
     <details id="favoriteZonesWrapper" open>
       <summary>Favorites</summary>
       <div id="favoriteZonesList" class="zone-container">
-        <p style="text-align:center; padding:2rem;">No favorites yet.</p>
+        <p style="text-align:center;
+        padding:2rem;">No favorites yet.</p>
       </div>
     </details>
 
-    <hr style="margin:2rem 0; border-color:rgba(255,255,255,0.08);">
+    <hr style="margin:2rem 0;
+    border-color:rgba(255,255,255,0.08);">
 
 
     <details id="recentZonesWrapper" open>
       <summary>
         <span class="summary-text">Recently Played</span>
-        <button class="clear-recent" onclick="clearRecent(); event.stopPropagation();">
+        <button class="clear-recent" onclick="clearRecent();
+        event.stopPropagation();">
           Clear Recent
         </button>
       </summary>
       <div id="recentZonesList" class="zone-container">
-        <p style="text-align:center; padding:2rem;">No recently played games.</p>
+        <p style="text-align:center;
+        padding:2rem;">No recently played games.</p>
       </div>
     </details>
 
 
 
-    <hr style="margin:2rem 0; border-color:rgba(255,255,255,0.08);">
+    <hr style="margin:2rem 0;
+    border-color:rgba(255,255,255,0.08);">
 
     <details id="allZonesWrapper" open>
       <summary>All Games</summary>
@@ -1270,8 +1328,10 @@ body[data-custom-theme="ixl"] {
   </main>
 
   <div id="zoneViewer">
-    <div id="zoneLoading" style="display:none; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%);">
-      <div class="spinner" style="width:50px; height:50px; border:4px solid var(--primary-color); border-top:4px solid transparent; border-radius:50%; animation:spin 1s linear infinite;"></div>
+    <div id="zoneLoading" style="display:none;
+    position:absolute; top:50%; left:50%; transform:translate(-50%, -50%);">
+      <div class="spinner" style="width:50px; height:50px; border:4px solid var(--primary-color); border-top:4px solid transparent;
+      border-radius:50%; animation:spin 1s linear infinite;"></div>
     </div>
     <div class="zone-header">
       <div class="zone-title">
@@ -1283,6 +1343,7 @@ body[data-custom-theme="ixl"] {
         <button onclick="fullscreenZone()">Fullscreen</button>
         <button onclick="aboutBlank()">Open in New Tab</button>
         <button onclick="downloadZone()">Download</button>
+     
         <button onclick="closeZone()">Close</button>
       </div>
     </div>
@@ -1303,8 +1364,10 @@ body[data-custom-theme="ixl"] {
 
   <footer>
     <div class="footer-links">
-      <a href="#" onclick="showContact(); return false;">Contact</a>
-      <a href="#" onclick="loadPrivacy(); return false;">Privacy Policy</a>
+  
+       <a href="#" onclick="showContact(); return false;">Contact</a>
+      <a href="#" onclick="loadPrivacy();
+      return false;">Privacy Policy</a>
       <a href="javascript:saveData()">Export Data</a>
       <label for="importData">Import Data</label>
       <input type="file" id="importData" style="display: none;" onchange="loadData(event)">
@@ -1334,6 +1397,7 @@ body[data-custom-theme="ixl"] {
         logo: "https://codehs.com/uploads/42b9587a6dd73b104e8ef00959c00eda"
       },
       elias: {
+   
         name: "Awesome Elias",
         logo: "https://codehs.com/uploads/bd2f2da062e0ca21039d671950a1b4f2"
       },
@@ -1346,6 +1410,7 @@ body[data-custom-theme="ixl"] {
         logo: "https://codehs.com/uploads/253e24974900cadf0698ddb27ec82579"
       },
       epstein: {
+      
         name: "Big E Math",
         logo: "https://codehs.com/uploads/e8baba644e4ec12f2f95e2ff6c183233"
       },      
@@ -1357,16 +1422,19 @@ body[data-custom-theme="ixl"] {
       securly: {
         name: "We Hate Securly",
         logo: "https://codehs.com/uploads/3db91fabcc5ff2565afaa29a6e9ca71d"
+   
       },
 	  camzzz: {
         name: "Camzzz GN Math",
         logo: "https://codehs.com/uploads/a9a10c007fe8fccd20732445bd0a74ed"
-      }, // <--- MAKE SURE THIS COMMA IS HERE
+      },
       ixl: { 
         name: "IXL Learning", 
         logo: "https://upload.wikimedia.org/wikipedia/commons/7/7d/IXL_Learning.png" 
-      } // <--- NO SEMICOLON HERE
-    }; // <--- THIS CLOSES THE ENTIRE themeConfig
+      }
+      // USER GENERATED THEMES WILL BE APPLIED DYNAMICALLY
+    };
+    
     // Background Particles
     function createParticles() {
       const particlesContainer = document.getElementById('bgParticles');
@@ -1381,15 +1449,33 @@ body[data-custom-theme="ixl"] {
       }
     }
 
+    // Helper: Hex to RGB for Glow effects
+    function hexToRgb(hex) {
+      // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+      var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+      hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+        return r + r + g + g + b + b;
+      });
+    
+      var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+      } : null;
+    }
+
     // Theme Switcher - FIXED to properly apply everything
     function setTheme(theme) {
-      // Remove custom theme if set
+      // Clear inline styles (user themes)
+      document.body.removeAttribute('style');
       document.body.removeAttribute('data-custom-theme');
       // Set the color theme
       document.body.setAttribute('data-theme', theme);
       // Save to localStorage
       localStorage.setItem('theme', theme);
       localStorage.removeItem('customTheme');
+      localStorage.removeItem('userColorThemeActive');
       // Update header to default
       updateHeader('default');
 
@@ -1400,6 +1486,8 @@ body[data-custom-theme="ixl"] {
     }
 
     function setCustomTheme(customTheme) {
+      // Clear inline styles (user themes)
+      document.body.removeAttribute('style');
       // Remove color theme
       document.body.removeAttribute('data-theme');
       // Set custom theme
@@ -1407,6 +1495,7 @@ body[data-custom-theme="ixl"] {
       // Save to localStorage
       localStorage.setItem('customTheme', customTheme);
       localStorage.removeItem('theme');
+      localStorage.removeItem('userColorThemeActive');
       // Update header based on custom theme
       updateHeader(customTheme);
       // Update UI
@@ -1416,62 +1505,235 @@ body[data-custom-theme="ixl"] {
       createParticles();
     }
 
-// Update header logo and text
-function updateHeader(themeKey) {
-  const config = themeConfig[themeKey] || themeConfig.default;
-  const logoImg = document.getElementById('headerLogo');
-  const headerText = document.getElementById('headerText');
+    // --- USER GENERATED THEME LOGIC ---
 
-  if (logoImg) {
-    logoImg.src = config.logo;
-    logoImg.alt = config.name + " Logo";
-  }
-  if (headerText) {
-    headerText.textContent = config.name;
-  }
-  document.title = config.name;
+    function generateThemeFromColor(hex) {
+        const rgb = hexToRgb(hex);
+        if(!rgb) return;
+        
+        // Calculate darker background
+        const bg1 = `rgb(${Math.max(0, rgb.r - 200)}, ${Math.max(0, rgb.g - 200)}, ${Math.max(0, rgb.b - 200)})`;
+        const bg2 = `rgb(${Math.max(0, rgb.r - 180)}, ${Math.max(0, rgb.g - 180)}, ${Math.max(0, rgb.b - 180)})`;
+        
+        document.body.removeAttribute('data-theme');
+        document.body.removeAttribute('data-custom-theme');
+        
+        document.body.style.setProperty('--primary-color', hex);
+        document.body.style.setProperty('--primary-glow', `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.5)`);
+        document.body.style.setProperty('--background-color', bg1);
+        document.body.style.setProperty('--card-bg', `rgba(20, 20, 20, 0.9)`);
+        document.body.style.setProperty('--shadow', `0 8px 32px rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.25)`);
+        document.body.style.setProperty('--input-bg', `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.1)`);
+        document.body.style.setProperty('--input-border', `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.4)`);
+        document.body.style.setProperty('--input-border-focus', hex);
+        document.body.style.setProperty('--header-bg-1', `rgba(${Math.max(0, rgb.r-50)}, ${Math.max(0, rgb.g-50)}, ${Math.max(0, rgb.b-50)}, 0.9)`);
+        document.body.style.setProperty('--header-bg-2', `rgba(${Math.max(0, rgb.r-20)}, ${Math.max(0, rgb.g-20)}, ${Math.max(0, rgb.b-20)}, 0.9)`);
+        document.body.style.setProperty('--summary-bg', `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.2)`);
+        document.body.style.setProperty('--summary-bg-hover', `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.3)`);
+        document.body.style.setProperty('--favorites-bg', `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.15)`);
+        document.body.style.setProperty('--bg-gradient-1', bg1);
+        document.body.style.setProperty('--bg-gradient-2', bg2);
+        
+        // Update local storage to remember we are in a user theme
+        localStorage.setItem('userColorThemeActive', hex);
+        localStorage.removeItem('theme');
+        localStorage.removeItem('customTheme');
+        
+        updateHeader('default');
+        createParticles();
+        updateThemeUI();
+    }
 
-  // ADD THIS LINE TO CHANGE THE FAVICON:
-  cloakIcon(config.logo); 
-}
+    function saveUserColorTheme() {
+        const currentHex = localStorage.getItem('userColorThemeActive');
+        if(!currentHex) {
+            alert("Pick a color first!");
+            return;
+        }
+        let saved = JSON.parse(localStorage.getItem('savedUserThemes') || "[]");
+        if(!saved.includes(currentHex)) {
+            saved.push(currentHex);
+            localStorage.setItem('savedUserThemes', JSON.stringify(saved));
+            renderSavedThemes(); // Refresh the list
+        } else {
+            alert("Theme already saved!");
+        }
+    }
+    
+    function deleteUserColorTheme(hex) {
+        let saved = JSON.parse(localStorage.getItem('savedUserThemes') || "[]");
+        saved = saved.filter(c => c !== hex);
+        localStorage.setItem('savedUserThemes', JSON.stringify(saved));
+        renderSavedThemes();
+    }
+
+    function renderSavedThemes() {
+        const list = document.getElementById('saved-themes-list');
+        if(!list) return;
+        const saved = JSON.parse(localStorage.getItem('savedUserThemes') || "[]");
+        list.innerHTML = '';
+        
+        if(saved.length === 0) {
+            list.innerHTML = '<span style="grid-column: span 4; text-align:center; opacity:0.5; font-size:0.8rem;">No saved themes yet.</span>';
+            return;
+        }
+
+        saved.forEach(hex => {
+            const div = document.createElement('div');
+            div.className = 'color-option';
+            div.style.background = hex;
+            div.title = "Click to apply, Right click to delete";
+            div.onclick = () => generateThemeFromColor(hex);
+            div.oncontextmenu = (e) => {
+                e.preventDefault();
+                if(confirm("Delete this saved color?")) {
+                    deleteUserColorTheme(hex);
+                }
+            };
+            
+            // Check if active
+            if(localStorage.getItem('userColorThemeActive') === hex) {
+                div.classList.add('active');
+            }
+            
+            list.appendChild(div);
+        });
+    }
+
+    // --- ADVANCED THEME CREATOR ---
+    function generateExportCode() {
+        const name = document.getElementById('maker-name').value || "My Cool Theme";
+        const logo = document.getElementById('maker-logo').value || "https://codehs.com/uploads/84799a0bb8e09668879b73acd5e7abaa";
+        const color = document.getElementById('maker-color').value || "#0000ff";
+        const id = name.toLowerCase().replace(/[^a-z0-9]/g, '');
+        
+        const rgb = hexToRgb(color);
+        
+        const cssCode = `    /* Custom Theme: ${name} */
+    body[data-custom-theme="${id}"] {
+      --primary-color: ${color};
+      --primary-glow: rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.5);
+      --background-color: #050505;
+      --card-bg: rgba(20, 20, 20, 0.8);
+      --popup-bg: rgba(15, 15, 15, 0.95);
+      --shadow: 0 8px 32px rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.25);
+      --input-bg: rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.08);
+      --input-border: rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.35);
+      --input-border-focus: ${color};
+      --header-bg-1: rgba(${Math.max(0,rgb.r-100)}, ${Math.max(0,rgb.g-100)}, ${Math.max(0,rgb.b-100)}, 0.9);
+      --header-bg-2: rgba(${Math.max(0,rgb.r-50)}, ${Math.max(0,rgb.g-50)}, ${Math.max(0,rgb.b-50)}, 0.9);
+      --summary-bg: rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.15);
+      --summary-bg-hover: rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.25);
+      --favorites-bg: rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.1);
+      --import-color: ${color};
+      --search-placeholder: rgba(255, 255, 255, 0.4);
+      --bg-gradient-1: #050505;
+      --bg-gradient-2: #0a0a0a;
+    }`;
+
+        const jsCode = `      ${id}: {
+        name: "${name}",
+        logo: "${logo}"
+      },`;
+      
+      const htmlCode = `            <div class="theme-option" onclick="setCustomTheme('${id}');" title="${name}" style="background: linear-gradient(135deg, #050505, ${color});">
+              <img src="${logo}" alt="${name}">
+            </div>`;
+
+        const fullOutput = `/* 1. Add this to CSS: */
+${cssCode}
+
+/* 2. Add this to themeConfig in JS: */
+${jsCode}
+
+/* 3. Add this to HTML inside showColorSettings(): */
+${htmlCode}`;
+
+        const exportArea = document.getElementById('maker-export');
+        exportArea.value = fullOutput;
+        exportArea.style.display = 'block';
+        alert("Code generated! Copy the text below and send it to the library.");
+    }
+    
+    // --- END USER THEMES ---
+
+
+    // Update header logo and text
+    function updateHeader(themeKey) {
+      const config = themeConfig[themeKey] || themeConfig.default;
+      const logoImg = document.getElementById('headerLogo');
+      const headerText = document.getElementById('headerText');
+
+      if (logoImg) {
+        logoImg.src = config.logo;
+        logoImg.alt = config.name + " Logo";
+      }
+      if (headerText) {
+        headerText.textContent = config.name;
+      }
+      document.title = config.name;
+      // ADD THIS LINE TO CHANGE THE FAVICON:
+      cloakIcon(config.logo);
+    }
 
     // Update UI to reflect current theme
     function updateThemeUI() {
       const currentTheme = localStorage.getItem('theme') || 'default';
       const currentCustomTheme = localStorage.getItem('customTheme');
+      const isUserColor = localStorage.getItem('userColorThemeActive');
 
       // Update color options
       document.querySelectorAll('.color-option').forEach(btn => {
         btn.classList.remove('active');
-        const themeName = btn.classList.contains('color-blue') ? 'default' :
-          btn.classList.contains('color-cyberpunk') ? 'cyberpunk' :
-          btn.classList.contains('color-matrix') ? 'matrix' :
-          btn.classList.contains('color-sunset') ? 'sunset' : '';
-        if (!currentCustomTheme && currentTheme === themeName) {
-          btn.classList.add('active');
+        if(!isUserColor && !currentCustomTheme) {
+            const themeName = btn.classList.contains('color-blue') ? 'default' :
+              btn.classList.contains('color-cyberpunk') ? 'cyberpunk' :
+              btn.classList.contains('color-matrix') ? 'matrix' :
+              btn.classList.contains('color-sunset') ? 'sunset' : '';
+            if (currentTheme === themeName) {
+              btn.classList.add('active');
+            }
         }
       });
       // Update custom theme options
       document.querySelectorAll('.theme-option').forEach(btn => {
         btn.classList.remove('active');
-        const customName = btn.classList.contains('theme-default') ? 'default' :
-          btn.classList.contains('theme-library') ? 'library' :
-          btn.classList.contains('theme-elias') ? 'elias' :
-          btn.classList.contains('theme-lebron') ? 'lebron' :
-          btn.classList.contains('theme-kirk') ? 'kirk' :
-          btn.classList.contains('theme-steam') ? 'steam' : '';
-        if (currentCustomTheme === customName || (!currentCustomTheme && customName === 'default' && currentTheme === 'default')) {
-          btn.classList.add('active');
+        // Only active if NOT in user color mode
+        if(!isUserColor) {
+            const customName = btn.classList.contains('theme-default') ? 'default' :
+              btn.classList.contains('theme-library') ? 'library' :
+              btn.classList.contains('theme-elias') ? 'elias' :
+              btn.classList.contains('theme-lebron') ? 'lebron' :
+              btn.classList.contains('theme-kirk') ? 'kirk' :
+              btn.classList.contains('theme-steam') ? 'steam' : 
+              btn.dataset.customTheme ? btn.dataset.customTheme : '';
+              
+            // Specific check for Securly/Camzzz/IXL via title attribute matching or manual check
+            let isMatch = false;
+            if(btn.title === "Securly" && currentCustomTheme === "securly") isMatch = true;
+            if(btn.title === "Camzzz" && currentCustomTheme === "camzzz") isMatch = true;
+            if(btn.title === "IXL Learning" && currentCustomTheme === "ixl") isMatch = true;
+            if(btn.title === "Epstein" && currentCustomTheme === "epstein") isMatch = true;
+            
+            if (currentCustomTheme === customName || (!currentCustomTheme && customName === 'default' && currentTheme === 'default') || isMatch) {
+              btn.classList.add('active');
+            }
         }
       });
+      
+      // Update saved user themes UI
+      renderSavedThemes();
     }
 
     // Load saved theme on startup
     function loadSavedTheme() {
       const savedTheme = localStorage.getItem('theme');
       const savedCustomTheme = localStorage.getItem('customTheme');
+      const savedUserColor = localStorage.getItem('userColorThemeActive');
 
-      if (savedCustomTheme) {
+      if(savedUserColor) {
+          generateThemeFromColor(savedUserColor);
+      } else if (savedCustomTheme) {
         document.body.setAttribute('data-custom-theme', savedCustomTheme);
         updateHeader(savedCustomTheme);
       } else if (savedTheme) {
@@ -1514,7 +1776,6 @@ function updateHeader(themeKey) {
       if (!list) return;
 
       list.innerHTML = "";
-
       if (recents.length === 0) {
         list.innerHTML = '<p style="text-align:center; padding:2rem;">No recently played games</p>';
         return;
@@ -1532,6 +1793,7 @@ function updateHeader(themeKey) {
         remove.innerHTML = `
       <svg viewBox="0 0 24 24">
         <line x1="6" y1="6" x2="18" y2="18"/>
+ 
         <line x1="18" y1="6" x2="6" y2="18"/>
       </svg>
     `;
@@ -1542,6 +1804,7 @@ function updateHeader(themeKey) {
           card.style.transform = "scale(0.8)";
           setTimeout(() => {
             removeFromRecentlyPlayed(id);
+         
           }, 200);
         };
 
@@ -1561,10 +1824,10 @@ function updateHeader(themeKey) {
           { id: 'lib', name: 'The Library:', author: 'Camzzz', url: 'https://docs.google.com/document/d/1ip8XBOUzU7pzqmPxc2T8YJKHfbYwn6ZmFIPNd7ta708/edit?tab=t.jvhiydqpf78o', cover: 'https://codehs.com/uploads/42b9587a6dd73b104e8ef00959c00eda' },
           { id: 'raz', name: 'raz.launcher', author: 'Camzzz', url: 'https://webmaker.app/create/T3baO7VwpZ?layout=4/', cover: 'https://codehs.com/uploads/657ae227967f2a74ff60938003ba5e8d' },
           { id: 'sgc', name: 'Story Network Google Classroom', author: 'Camzzz', url: 'https://classroom.google.com/c/ODQyMTAyMTUwMzI1?cjc=zopuekrn', cover: 'https://codehs.com/uploads/84799a0bb8e09668879b73acd5e7abaa' },
-          { id: 'securly', name: 'Securly Checker', author: 'securly (we hate them)', url: 'https://securly.status.io/', cover: 'https://codehs.com/uploads/0994a90a467c82d4adf741341f5dc33a' },
+          
+        { id: 'securly', name: 'Securly Checker', author: 'securly (we hate them)', url: 'https://securly.status.io/', cover: 'https://codehs.com/uploads/0994a90a467c82d4adf741341f5dc33a' },
           { id: 'crazygames', name: 'Crazy-Games', author: 'Camzzz', url: 'https://www.crazygames.com/?scrlcbp=.', cover: 'https://codehs.com/uploads/e22517126073dc51253ba7d81320bc49' }
         ];
-
         // Combine manual games + fetched JSON
         zones = [...pinnedGames, ...json];
 
@@ -1577,26 +1840,29 @@ function updateHeader(themeKey) {
         const embed = window.location.hash.includes("embed");
         if (id) {
           const zone = zones.find(zone => zone.id + '' == id + '');
-          if (zone) {
+        if (zone) {
             if (embed) {
               if (zone.url.startsWith("http")) {
                 window.open(zone.url, "_blank");
-              } else {
+            } else {
                 const url = zone.url.replace("{COVER_URL}", coverURL).replace("{HTML_URL}", htmlURL);
-                fetch(url + "?t=" + Date.now()).then(response => response.text()).then(html => {
+            fetch(url + "?t=" + Date.now()).then(response => response.text()).then(html => {
                   document.documentElement.innerHTML = html;
                   const popup = document.createElement("div");
                   popup.style.position = "fixed";
                   popup.style.bottom = "20px";
+           
                   popup.style.right = "20px";
                   popup.style.backgroundColor = "#cce5ff";
                   popup.style.color = "#004085";
                   popup.style.padding = "10px";
                   popup.style.border = "1px solid #b8daff";
+         
                   popup.style.borderRadius = "5px";
                   popup.style.boxShadow = "0px 0px 10px rgba(0,0,0,0.1)";
                   popup.style.fontFamily = "Arial, sans-serif";
                   popup.innerHTML = `Play more games at <a href="https://gn-math.github.io" target="_blank" style="color:#004085; font-weight:bold;">https://gn-math.github.io</a>!`;
+                 
                   const closeBtn = document.createElement("button");
                   closeBtn.innerText = "✖";
                   closeBtn.style.marginLeft = "10px";
@@ -1608,14 +1874,15 @@ function updateHeader(themeKey) {
                   closeBtn.onclick = () => popup.remove();
                   popup.appendChild(closeBtn);
                   document.body.appendChild(popup);
-                  document.documentElement.querySelectorAll('script').forEach(oldScript => {
+            document.documentElement.querySelectorAll('script').forEach(oldScript => {
                     const newScript = document.createElement('script');
                     if (oldScript.src) newScript.src = oldScript.src;
                     else newScript.textContent = oldScript.textContent;
                     document.body.appendChild(newScript);
+        
                   });
                 }).catch(error => alert("Failed to load zone: " + error));
-              }
+            }
             } else {
               openZone(zone);
             }
@@ -1651,7 +1918,6 @@ function updateHeader(themeKey) {
 
       others.sort((a, b) => a.name.localeCompare(b.name));
       zones = [...pinned, ...others];
-
       displayZones(zones);
       updateRecentlyPlayed();
       updateFavorites();
@@ -1713,7 +1979,6 @@ function updateHeader(themeKey) {
       img.alt = file.name;
       img.loading = "lazy";
       img.className = "lazy-zone-img";
-
       /* ---------- BUTTON ---------- */
       const btn = document.createElement("button");
       btn.textContent = file.name;
@@ -1733,6 +1998,7 @@ function updateHeader(themeKey) {
             obs.unobserve(entry.target);
           }
         });
+    
       }, {
         rootMargin: "120px",
         threshold: 0.1
@@ -1769,7 +2035,8 @@ function updateHeader(themeKey) {
               zoneFrame = document.createElement("iframe");
               zoneFrame.id = "zoneFrame";
               zoneViewer.appendChild(zoneFrame);
-            }
+ 
+           }
             zoneFrame.contentDocument.open();
             zoneFrame.contentDocument.write(html);
             zoneFrame.contentDocument.close();
@@ -1777,6 +2044,7 @@ function updateHeader(themeKey) {
             zoneFrame.style.pointerEvents = "auto";
             document.getElementById("zoneLoading").style.display = "none";
 
+           
             document.getElementById('zoneName').textContent = file.name;
             document.getElementById('zoneId').textContent = file.id;
             document.getElementById('zoneAuthor').textContent = "by " + file.author;
@@ -1804,7 +2072,7 @@ function updateHeader(themeKey) {
           newWindow.document.close();
         }
       });
-    }
+      }
 
     function closeZone() {
       zoneViewer.style.display = "none";
@@ -1823,13 +2091,14 @@ function updateHeader(themeKey) {
           });
           const url = URL.createObjectURL(blob);
           const a = document.createElement('a');
-          a.href = url;
+          a.href 
+          = url;
           a.download = zone.name + ".html";
 
           a.click();
           URL.revokeObjectURL(url);
         });
-    }
+      }
 
     function fullscreenZone() {
       const el = zoneFrame;
@@ -1837,7 +2106,7 @@ function updateHeader(themeKey) {
       else if (el.mozRequestFullScreen) el.mozRequestFullScreen();
       else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
       else if (el.msRequestFullscreen) el.msRequestFullscreen();
-    }
+      }
 
     function saveData() {
       let data = JSON.stringify(localStorage) + "\n\n|\n\n" + document.cookie;
@@ -1861,12 +2130,12 @@ function updateHeader(themeKey) {
         } catch {}
         if (cookieData) {
           cookieData.split("; ").forEach(c => document.cookie = c);
-        }
+      }
         alert("Data loaded");
         location.reload();
       };
       reader.readAsText(file);
-    }
+      }
 
     function cloakIcon(url) {
       const link = document.querySelector("link[rel~='icon']") || document.createElement('link');
@@ -1877,7 +2146,7 @@ function updateHeader(themeKey) {
 
     function cloakName(string) {
       document.title = string.trim() ||
-        "Home";
+      "Home";
     }
 
     function tabCloak() {
@@ -1896,63 +2165,110 @@ function updateHeader(themeKey) {
       closePopup();
       const currentTheme = localStorage.getItem('theme') || 'default';
       const currentCustomTheme = localStorage.getItem('customTheme');
+      const isUserColor = localStorage.getItem('userColorThemeActive');
 
       document.getElementById('popupTitle').textContent = "Appearance";
       document.getElementById('popupBody').innerHTML = `
         <div class="settings-tabs">
-          <button class="settings-tab active" onclick="switchSettingsTab('colors', this)">Color Themes</button>
-          <button class="settings-tab" onclick="switchSettingsTab('custom', this)">Custom Themes</button>
+          <button class="settings-tab active" onclick="switchSettingsTab('colors', this)">Color</button>
+          <button class="settings-tab" onclick="switchSettingsTab('custom', this)">Custom</button>
+          <button class="settings-tab" onclick="switchSettingsTab('maker', this)">Creator</button>
         </div>
         
         <div class="settings-panel active" id="colors-panel">
-          <p style="margin-bottom: 1rem; color: var(--text-color);">Choose your color theme:</p>
+          <p style="margin-bottom: 0.5rem; color: var(--text-color);">Choose your color theme:</p>
           <div class="color-picker-grid">
-            <div class="color-option color-blue ${!currentCustomTheme && currentTheme === 'default' ? 'active' : ''}" onclick="setTheme('default');" title="Classic Blue"></div>
-            <div class="color-option color-cyberpunk ${!currentCustomTheme && currentTheme === 'cyberpunk' ? 'active' : ''}" onclick="setTheme('cyberpunk');" title="Cyberpunk"></div>
-            <div class="color-option color-matrix ${!currentCustomTheme && currentTheme === 'matrix' ? 'active' : ''}" onclick="setTheme('matrix');" title="Matrix"></div>
-            <div class="color-option color-sunset ${!currentCustomTheme && currentTheme === 'sunset' ? 'active' : ''}" onclick="setTheme('sunset');" title="Sunset"></div>
+             <div class="color-option color-blue ${!isUserColor && !currentCustomTheme && currentTheme === 'default' ? 'active' : ''}" onclick="setTheme('default');"
+             title="Classic Blue"></div>
+            <div class="color-option color-cyberpunk ${!isUserColor && !currentCustomTheme && currentTheme === 'cyberpunk' ? 'active' : ''}" onclick="setTheme('cyberpunk');"
+             title="Cyberpunk"></div>
+            <div class="color-option color-matrix ${!isUserColor && !currentCustomTheme && currentTheme === 'matrix' ? 'active' : ''}" onclick="setTheme('matrix');"
+             title="Matrix"></div>
+            <div class="color-option color-sunset ${!isUserColor && !currentCustomTheme && currentTheme === 'sunset' ? 'active' : ''}" onclick="setTheme('sunset');"
+             title="Sunset"></div>
           </div>
+          
+          <hr style="margin: 1.5rem 0; border-color: var(--input-border);">
+          
+          <p style="margin-bottom: 0.5rem; color: var(--text-color);">Make your own color theme:</p>
+          <div style="display:flex; gap:10px; align-items:center;">
+             <input type="color" class="color-picker-input" id="simple-color-picker" oninput="generateThemeFromColor(this.value)">
+             <button onclick="saveUserColorTheme()" style="width: 7rem; padding: 1rem 1rem;">Save</button>
+          </div>
+          <p style="font-size: 0.8rem; opacity: 0.7; margin-top: 5px;">Pick a color and it will automatically generate a theme!</p>
+
+          <p style="margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-color);">Previously Made Themes:</p>
+          <div class="color-picker-grid" id="saved-themes-list">
+             </div>
         </div>
         
         <div class="settings-panel" id="custom-panel">
           <p style="margin-bottom: 1rem; color: var(--text-color);">Choose your custom theme:</p>
           <div class="color-picker-grid">
-            <div class="theme-option theme-default ${!currentCustomTheme && currentTheme === 'default' ? 'active' : ''}" onclick="setTheme('default');" title="GN Math">
+            <div class="theme-option theme-default ${!isUserColor && !currentCustomTheme && currentTheme === 'default' ? 'active' : ''}" onclick="setTheme('default');"
+             title="GN Math">
               <img src="https://codehs.com/uploads/84799a0bb8e09668879b73acd5e7abaa" alt="GN Math">
             </div>
-            <div class="theme-option theme-library ${currentCustomTheme === 'library' ? 'active' : ''}" onclick="setCustomTheme('library');" title="The Library">
+            <div class="theme-option theme-library ${currentCustomTheme === 'library' ? 'active' : ''}" onclick="setCustomTheme('library');"
+             title="The Library">
               <img src="https://codehs.com/uploads/42b9587a6dd73b104e8ef00959c00eda" alt="Library">
             </div>
-            <div class="theme-option theme-elias ${currentCustomTheme === 'elias' ? 'active' : ''}" onclick="setCustomTheme('elias');" title="Awesome Elias">
+            <div class="theme-option theme-elias ${currentCustomTheme === 'elias' ? 'active' : ''}" onclick="setCustomTheme('elias');"
+             title="Awesome Elias">
               <img src="https://codehs.com/uploads/bd2f2da062e0ca21039d671950a1b4f2" alt="Elias">
             </div>
-            <div class="theme-option theme-lebron ${currentCustomTheme === 'lebron' ? 'active' : ''}" onclick="setCustomTheme('lebron');" title="Lebron da Goat">
+            <div class="theme-option theme-lebron ${currentCustomTheme === 'lebron' ? 'active' : ''}" onclick="setCustomTheme('lebron');"
+             title="Lebron da Goat">
               <img src="https://codehs.com/uploads/4f53f068f90e1f12917f4079284218fc" alt="Lebron">
             </div>
-            <div class="theme-option theme-kirk ${currentCustomTheme === 'kirk' ? 'active' : ''}" onclick="setCustomTheme('kirk');" title="GN Kirk">
+            <div class="theme-option theme-kirk ${currentCustomTheme === 'kirk' ? 'active' : ''}" onclick="setCustomTheme('kirk');"
+             title="GN Kirk">
               <img src="https://codehs.com/uploads/253e24974900cadf0698ddb27ec82579" alt="Kirk">
             </div>
-            <div class="theme-option theme-steam ${currentCustomTheme === 'steam' ? 'active' : ''}" onclick="setCustomTheme('steam');" title="Steam">
+            <div class="theme-option theme-steam ${currentCustomTheme === 'steam' ? 'active' : ''}" onclick="setCustomTheme('steam');"
+             title="Steam">
               <img src="https://codehs.com/uploads/91d3dfec9bcbafba9a912a9b1058b5c2" alt="Steam">
             </div>
-			<div class="theme-option theme-ixl ${currentCustomTheme === 'ixl' ? 'active' : ''}" onclick="setCustomTheme('ixl');" title="IXL Learning">
+			<div class="theme-option theme-ixl ${currentCustomTheme === 'ixl' ? 'active' : ''}" onclick="setCustomTheme('ixl');"
+             title="IXL Learning">
 			  <img src="https://upload.wikimedia.org/wikipedia/commons/7/7d/IXL_Learning.png" alt="IXL">
 			</div>
 			
-<div class="theme-option theme-epstein" data-custom-theme="epstein" onclick="setCustomTheme('epstein')">
-  <img src="https://codehs.com/uploads/e8baba644e4ec12f2f95e2ff6c183233" alt="Epstein">
-</div>
-            <div class="theme-option ${currentCustomTheme === 'securly' ? 'active' : ''}" style="background:#007bff;" onclick="setCustomTheme('securly');" title="Securly">
+            <div class="theme-option theme-epstein ${currentCustomTheme === 'epstein' ? 'active' : ''}" data-custom-theme="epstein" onclick="setCustomTheme('epstein')">
+              <img src="https://codehs.com/uploads/e8baba644e4ec12f2f95e2ff6c183233" alt="Epstein">
+            </div>
+            <div class="theme-option ${currentCustomTheme === 'securly' ? 'active' : ''}" style="background:#007bff;"
+             onclick="setCustomTheme('securly');" title="Securly">
               <img src="https://codehs.com/uploads/3db91fabcc5ff2565afaa29a6e9ca71d" alt="Securly">
             </div>
-            <div class="theme-option ${currentCustomTheme === 'camzzz' ? 'active' : ''}" style="background:#AA00FF;" onclick="setCustomTheme('camzzz');" title="Camzzz">
+            <div class="theme-option ${currentCustomTheme === 'camzzz' ? 'active' : ''}" style="background:#AA00FF;"
+             onclick="setCustomTheme('camzzz');" title="Camzzz">
               <img src="https://codehs.com/uploads/a9a10c007fe8fccd20732445bd0a74ed" alt="Camzzz">
             </div>
           </div>
           <p style="margin-top: 1.5rem; font-size: 0.9rem; opacity: 0.7; color: var(--text-color);">Suggest New Themes in the Library!</p>
         </div>
+
+        <div class="settings-panel" id="maker-panel">
+            <p style="color: var(--text-color); margin-bottom: 1rem;">Create a unique theme for the community!</p>
+            
+            <label>Theme Name</label>
+            <input type="text" id="maker-name" placeholder="e.g. Neon Nights">
+            
+            <label>Logo URL</label>
+            <input type="text" id="maker-logo" placeholder="https://...">
+            
+            <label>Primary Color</label>
+            <input type="color" class="color-picker-input" id="maker-color" value="#0000ff">
+            
+            <button onclick="generateExportCode()">Generate Code to Export</button>
+            
+            <p style="margin-top: 1rem; font-size: 0.85rem; opacity: 0.8;">Copy the code below and put it in the Library so we can see it!</p>
+            <textarea id="maker-export" class="code-export-box" readonly style="display:none;"></textarea>
+        </div>
       `;
       document.getElementById('popupOverlay').style.display = "flex";
+      renderSavedThemes();
     }
 
     function switchSettingsTab(tab, btn) {
@@ -1973,7 +2289,6 @@ function updateHeader(themeKey) {
       `;
       document.getElementById('popupOverlay').style.display = "flex";
     });
-
     function showContact() {
       document.getElementById('popupTitle').textContent = "Contact";
       document.getElementById('popupBody').innerHTML = `
@@ -2009,7 +2324,6 @@ function updateHeader(themeKey) {
 
     function toggleFavorite(id, starEl) {
       let favs = getFavorites();
-
       if (favs.includes(id)) {
         favs = favs.filter(x => x !== id);
         starEl.classList.remove("active");
@@ -2063,7 +2377,6 @@ function updateHeader(themeKey) {
     listZones();
 
     const schoolList = ["deledao", "goguardian", "lightspeed", "linewize", "securly", ".edu/"];
-
     function isBlockedDomain(url) {
       const domain = new URL(url, location.origin).hostname + "/";
       return schoolList.some(s => domain.includes(s));
