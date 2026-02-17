@@ -219,6 +219,101 @@
       transform: translateY(-1px);
     }
 
+/* ---------- CATEGORY NAV BAR ---------- */
+.category-nav-wrapper {
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  background: linear-gradient(135deg, var(--header-bg-1), var(--header-bg-2));
+  border-bottom: 2px solid var(--primary-color);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+.category-nav-wrapper.collapsed .category-nav {
+  max-height: 0;
+  opacity: 0;
+  padding: 0;
+}
+
+.category-toggle {
+  width: 100%;
+  background: var(--header-bg-1);
+  border: none;
+  color: white;
+  padding: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.category-toggle:hover {
+  background: var(--header-bg-2);
+}
+
+.category-toggle svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s ease;
+}
+
+.category-nav-wrapper.collapsed .category-toggle svg {
+  transform: rotate(180deg);
+}
+
+.category-nav {
+  display: flex;
+  gap: 0.5rem;
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-height: 200px;
+  opacity: 1;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.category-btn {
+  background: var(--input-bg);
+  border: 2px solid var(--input-border);
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 9999px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
+}
+
+.category-btn:hover {
+  background: var(--input-border);
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--primary-glow);
+}
+
+.category-btn.active {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 20px var(--primary-glow);
+}
+
+/* Hide category sections by default */
+.category-section {
+  display: none;
+}
+
+.category-section.active {
+  display: block;
+}
+
     :root {
       --primary-color: #0000ff;
       --primary-glow: rgba(0, 0, 255, 0.4);
@@ -1286,7 +1381,24 @@
       </div>
     </div>
   </header>
-
+<!-- CATEGORY NAVIGATION BAR -->
+  <div class="category-nav-wrapper collapsed" id="categoryNavWrapper">
+    <button class="category-toggle" onclick="toggleCategoryNav()">
+      <span>Categories</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="6 9 12 15 18 9"></polyline>
+      </svg>
+    </button>
+    <div class="category-nav">
+      <button class="category-btn active" onclick="filterByCategory('all')">All Games</button>
+      <button class="category-btn" onclick="filterByCategory('popular')">🔥 Popular</button>
+      <button class="category-btn" onclick="filterByCategory('story-network')">📚 Story Network</button>
+      <button class="category-btn" onclick="filterByCategory('fnf')">🎤 FNF</button>
+      <button class="category-btn" onclick="filterByCategory('fnaf')">🐻 FNAF</button>
+      <button class="category-btn" onclick="filterByCategory('minecraft')">⛏️ Minecraft</button>
+      <button class="category-btn" onclick="filterByCategory('toby-fox')">🎵 Toby Fox</button>
+    </div>
+  </div>
   <main>
 
     <details id="favoriteZonesWrapper" open>
@@ -1819,21 +1931,30 @@ ${htmlCode}`;
         const response = await fetch(zonesURL + "?t=" + Date.now());
         const json = await response.json();
 
-        // --- MANUALLY ADD REQUESTED GAMES HERE ---
-        const pinnedGames = [
-          { id: 'lib', name: 'The Library:', author: 'Camzzz', url: 'https://docs.google.com/document/d/1ip8XBOUzU7pzqmPxc2T8YJKHfbYwn6ZmFIPNd7ta708/edit?tab=t.jvhiydqpf78o', cover: 'https://codehs.com/uploads/42b9587a6dd73b104e8ef00959c00eda' },
-          { id: 'raz', name: 'raz.launcher', author: 'Camzzz', url: 'https://webmaker.app/create/T3baO7VwpZ?layout=4/', cover: 'https://codehs.com/uploads/657ae227967f2a74ff60938003ba5e8d' },
-          { id: 'sgc', name: 'Story Network Google Classroom', author: 'Camzzz', url: 'https://classroom.google.com/c/ODQyMTAyMTUwMzI1?cjc=zopuekrn', cover: 'https://codehs.com/uploads/84799a0bb8e09668879b73acd5e7abaa' },
-          
-        { id: 'securly', name: 'Securly Checker', author: 'securly (we hate them)', url: 'https://securly.status.io/', cover: 'https://codehs.com/uploads/0994a90a467c82d4adf741341f5dc33a' },
-          { id: 'crazygames', name: 'Crazy-Games', author: 'Camzzz', url: 'https://www.crazygames.com/?scrlcbp=.', cover: 'https://codehs.com/uploads/e22517126073dc51253ba7d81320bc49' }
-        ];
-        // Combine manual games + fetched JSON
-        zones = [...pinnedGames, ...json];
+// ============ CATEGORY CONFIGURATION ============
+    // Story Network games (hidden from All Games section)
+    const storyNetworkGames = [
+      { id: 'lib', name: 'The Library:', author: 'Camzzz', url: 'https://docs.google.com/document/d/1ip8XBOUzU7pzqmPxc2T8YJKHfbYwn6ZmFIPNd7ta708/edit?tab=t.pbpbt3le3921', cover: 'https://codehs.com/uploads/42b9587a6dd73b104e8ef00959c00eda' },
+      { id: 'raz', name: 'raz.launcher', author: 'Camzzz', url: 'https://webmaker.app/create/T3baO7VwpZ?layout=4/', cover: 'https://codehs.com/uploads/657ae227967f2a74ff60938003ba5e8d' },
+      { id: 'sgc', name: 'Story Network Google Classroom', author: 'Camzzz', url: 'https://classroom.google.com/c/ODQyMTAyMTUwMzI1?cjc=zopuekrn', cover: 'https://codehs.com/uploads/84799a0bb8e09668879b73acd5e7abaa' },
+      { id: 'zicon', name: 'zicon', author: 'Camzzz', url: 'https://camzzz-alt.github.io/zicon/?scrlcbp=.', cover: 'https://codehs.com/uploads/be466224b603908717d7cff7681a05d5' }
+    ];
 
-        await fetchPopularity();
-        sortZones();
-        updateRecentlyPlayed();
+    // Manual popular games (add game IDs here to force them into Popular section)
+    const manualPopularIds = [
+      // Add game IDs here like: 123, 456, etc.
+    ];
+
+    let currentCategory = 'all';
+
+// Toby Fox games removed
+const tobyFoxGames = [];
+
+// Combine Story Network + Toby Fox + fetched JSON
+zones = [...storyNetworkGames, ...tobyFoxGames, ...json];
+    await fetchPopularity();
+    sortZones();
+    updateRecentlyPlayed();
 
         const search = new URLSearchParams(window.location.search);
         const id = search.get('id');
@@ -1910,18 +2031,21 @@ ${htmlCode}`;
       }
     }
 
-    function sortZones() {
-      // Logic to keep the pinned games at the top
-      const pinnedIds = ['lib', 'raz', 'sgc', 'securly', 'crazygames'];
-      const pinned = zones.filter(z => pinnedIds.includes(z.id));
-      const others = zones.filter(z => !pinnedIds.includes(z.id));
-
-      others.sort((a, b) => a.name.localeCompare(b.name));
-      zones = [...pinned, ...others];
-      displayZones(zones);
-      updateRecentlyPlayed();
-      updateFavorites();
-    }
+function sortZones() {
+  // Story Network games should NEVER appear in All Games
+  const storyNetworkIds = ['lib', 'raz', 'sgc', 'zicon'];
+  
+  // Filter out Story Network games for display
+  const displayableZones = zones.filter(z => !storyNetworkIds.includes(z.id));
+  
+  // Sort alphabetically
+  displayableZones.sort((a, b) => a.name.localeCompare(b.name));
+  
+  // Display only non-Story Network games
+  displayZones(displayableZones);
+  updateRecentlyPlayed();
+  updateFavorites();
+}
 
     function displayZones(zonesToShow) {
       container.innerHTML = "";
@@ -2397,6 +2521,98 @@ ${htmlCode}`;
     HTMLCanvasElement.prototype.toDataURL = function() {
       return "";
     };
+    
+    // ============ CATEGORY FUNCTIONS ============
+
+// Toggle category nav open/closed
+function toggleCategoryNav() {
+  const wrapper = document.getElementById('categoryNavWrapper');
+  wrapper.classList.toggle('collapsed');
+}
+
+// Filter games by category
+function filterByCategory(category) {
+  currentCategory = category;
+  
+  // Update active button
+  document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+  
+  // Get Story Network IDs (always hidden from All Games)
+  const storyNetworkIds = ['lib', 'raz', 'sgc', 'zicon'];
+  
+  let filteredZones = [];
+  
+  if (category === 'all') {
+    // Show all games EXCEPT Story Network games
+    filteredZones = zones.filter(z => !storyNetworkIds.includes(z.id));
+  } 
+  else if (category === 'story-network') {
+    // Show ONLY Story Network games
+    filteredZones = zones.filter(z => storyNetworkIds.includes(z.id));
+  }
+  else if (category === 'popular') {
+    // Show popular games (top 15 by stats + manual additions)
+    const manualPopularIds = []; // Add IDs here like: ['raz', 'lib']
+    
+    // Get top games by popularity data
+    const sortedByPopularity = zones
+      .filter(z => !storyNetworkIds.includes(z.id)) // Exclude Story Network
+      .filter(z => popularityData[z.id] > 0)
+      .sort((a, b) => (popularityData[b.id] || 0) - (popularityData[a.id] || 0))
+      .slice(0, 15);
+    
+    // Combine manual + auto popular (remove duplicates)
+    const popularIds = [...new Set([...manualPopularIds, ...sortedByPopularity.map(z => z.id)])];
+    filteredZones = zones.filter(z => popularIds.includes(z.id));
+  }
+  else if (category === 'fnf') {
+    // Friday Night Funkin games
+    filteredZones = zones.filter(z => 
+      !storyNetworkIds.includes(z.id) && 
+      (z.name.toLowerCase().includes('fnf') || z.name.toLowerCase().includes('friday night funkin'))
+    );
+  }
+  else if (category === 'fnaf') {
+    // Five Nights at Freddy's games
+    filteredZones = zones.filter(z => 
+      !storyNetworkIds.includes(z.id) && 
+      (z.name.toLowerCase().includes('fnaf') || z.name.toLowerCase().includes('five nights at'))
+    );
+  }
+  else if (category === 'minecraft') {
+    // Minecraft games
+    filteredZones = zones.filter(z => 
+      !storyNetworkIds.includes(z.id) && 
+      z.name.toLowerCase().includes('minecraft')
+    );
+  }
+  else if (category === 'toby-fox') {
+  // Toby Fox games
+  filteredZones = zones.filter(z => 
+    !storyNetworkIds.includes(z.id) && 
+    (z.name.toLowerCase().includes('undertale') || 
+     z.name.toLowerCase().includes('deltarune') ||
+     z.name.toLowerCase().includes('underwheels') ||
+     z.name.toLowerCase().includes('deltatraveler'))
+  );
+}
+  
+  // Update the display
+  displayZones(filteredZones);
+  
+  // Update summary title
+  const summaryText = category === 'all' ? 'All Games' :
+                      category === 'story-network' ? 'Story Network' :
+                      category === 'popular' ? 'Popular' :
+                      category === 'fnf' ? 'FNF' :
+                      category === 'fnaf' ? 'FNAF' :
+                      category === 'minecraft' ? 'Minecraft' : 'Games';
+  
+  document.getElementById("allZonesWrapper")
+    .querySelector("summary")
+    .textContent = `${summaryText} (${filteredZones.length})`;
+}
   </script>
 </body>
 
