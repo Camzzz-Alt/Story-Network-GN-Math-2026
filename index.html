@@ -23,6 +23,16 @@
   <meta property="twitter:image" content="https://codehs.com/uploads/84799a0bb8e09668879b73acd5e7abaa">
   
   <style>
+    @keyframes slideDown {
+  from {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
     /* ---------- RECENT REMOVE BUTTON ---------- */
     .recent-remove {
       position: absolute;
@@ -858,18 +868,36 @@
       object-fit: cover;
     }
 
-    .zone-item button {
-      background: var(--input-bg);
-      color: var(--text-color);
-      border: none;
-      padding: 14px;
-      font-size: 1.05rem;
-      cursor: pointer;
-      text-align: center;
-      flex-grow: 1;
-      transition: background 0.2s;
-      font-weight: 700;
-    }
+	.zone-item button {
+  background: var(--input-bg);
+  color: var(--text-color);
+  border: none;
+  padding: 14px;
+  font-size: 1.05rem;
+  cursor: pointer;
+  text-align: center;
+  flex-grow: 1;
+  transition: background 0.2s;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+}
+
+.play-count {
+  font-size: 0.75rem;
+  opacity: 0.7;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.play-count::before {
+  content: "▶";
+  font-size: 0.7rem;
+}
 
     .zone-item button:hover {
       background: var(--input-border);
@@ -1413,6 +1441,42 @@
   </div>
   <main>
 
+<div id="announcement-banner" style="
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 20px rgba(76, 175, 80, 0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    animation: slideDown 0.5s ease;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  " onclick="openMinecraft188()" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 25px rgba(76, 175, 80, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(76, 175, 80, 0.3)';">
+    <div>
+      <strong style="font-size: 1.2rem;">⛏️ Online Minecraft 1.8.8 Now Available!</strong><br>
+      <span style="font-size: 0.95rem; opacity: 0.95;">Play online multiplayer on the Vanilla Minecraft server directly from your desktop computer!</span>
+            <span style="font-size: 0.95rem; opacity: 0.95;">Online only works on desktop computers and it has to be opened into a new tab btw.</span>
+      <span style="font-size: 0.95rem; opacity: 0.95;"><b>Click me to open the minecraft version automatically.</b></span>
+    </div>
+    <button onclick="event.stopPropagation(); document.getElementById('announcement-banner').remove(); sessionStorage.setItem('hideMC188Banner', 'true');" style="
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 700;
+      white-space: nowrap;
+      transition: all 0.2s;
+    " onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">
+      Got it! ✓
+    </button>
+  </div>
+    
     <details id="favoriteZonesWrapper" open>
       <summary>Favorites</summary>
       <div id="favoriteZonesList" class="zone-container">
@@ -1872,11 +1936,17 @@ ${htmlCode}`;
     }
 
     function recordRecent(id) {
-      let recents = JSON.parse(localStorage.getItem("recentZones") || "[]");
-      recents = [id, ...recents.filter(x => x !== id)].slice(0, 12);
-      localStorage.setItem("recentZones", JSON.stringify(recents));
-      updateRecentlyPlayed();
-    }
+  let recents = JSON.parse(localStorage.getItem("recentZones") || "[]");
+  recents = [id, ...recents.filter(x => x !== id)].slice(0, 12);
+  localStorage.setItem("recentZones", JSON.stringify(recents));
+  
+  // Track play count
+  let playCounts = JSON.parse(localStorage.getItem("playCounts") || "{}");
+  playCounts[id] = (playCounts[id] || 0) + 1;
+  localStorage.setItem("playCounts", JSON.stringify(playCounts));
+  
+  updateRecentlyPlayed();
+}
 
     function removeFromRecentlyPlayed(id) {
       let recents = JSON.parse(localStorage.getItem("recentZones") || "[]");
@@ -2115,13 +2185,29 @@ function sortZones() {
       img.alt = file.name;
       img.loading = "lazy";
       img.className = "lazy-zone-img";
-      /* ---------- BUTTON ---------- */
-      const btn = document.createElement("button");
-      btn.textContent = file.name;
-      btn.onclick = (e) => {
-        e.stopPropagation();
-        openZone(file);
-      };
+/* ---------- BUTTON ---------- */
+const btn = document.createElement("button");
+
+// Game name
+const nameSpan = document.createElement("span");
+nameSpan.textContent = file.name;
+nameSpan.style.fontWeight = "700";
+btn.appendChild(nameSpan);
+
+// User's personal play count
+const playCounts = JSON.parse(localStorage.getItem("playCounts") || "{}");
+const userPlays = playCounts[file.id] || 0;
+if (userPlays > 0) {
+  const countSpan = document.createElement("span");
+  countSpan.className = "play-count";
+  countSpan.textContent = `Played ${userPlays} time${userPlays === 1 ? '' : 's'}`;
+  btn.appendChild(countSpan);
+}
+
+btn.onclick = (e) => {
+  e.stopPropagation();
+  openZone(file);
+};
 
       zoneItem.appendChild(img);
       zoneItem.appendChild(btn);
@@ -2542,13 +2628,29 @@ function toggleCategoryNav() {
   wrapper.classList.toggle('collapsed');
 }
 
-// Filter games by category
 function filterByCategory(category) {
   currentCategory = category;
   
   // Update active button
   document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
   event.target.classList.add('active');
+  
+  // Show/hide favorites and recent sections based on category
+  const favoritesSection = document.getElementById('favoriteZonesWrapper');
+  const recentSection = document.getElementById('recentZonesWrapper');
+  const dividers = document.querySelectorAll('main > hr');
+  
+  if (category === 'all') {
+    // Show everything for "All Games"
+    favoritesSection.style.display = 'block';
+    recentSection.style.display = 'block';
+    dividers.forEach(hr => hr.style.display = 'block');
+  } else {
+    // Hide favorites and recent for other categories
+    favoritesSection.style.display = 'none';
+    recentSection.style.display = 'none';
+    dividers.forEach(hr => hr.style.display = 'none');
+  }
   
   // Get Story Network IDs (always hidden from All Games)
   const storyNetworkIds = ['lib', 'raz', 'sgc', 'zicon'];
@@ -2621,10 +2723,56 @@ function filterByCategory(category) {
                       category === 'fnaf' ? 'FNAF' :
                       category === 'minecraft' ? 'Minecraft' : 'Games';
   
-  document.getElementById("allZonesWrapper")
+document.getElementById("allZonesWrapper")
     .querySelector("summary")
     .textContent = `${summaryText} (${filteredZones.length})`;
 }
+
+function openMinecraft188() {
+  console.log("Function called!");
+  console.log("All zones:", zones);
+  
+  // Find Minecraft 1.8.8 game
+  const mc188 = zones.find(z => {
+    const hasMinecraft = z.name.toLowerCase().includes('minecraft');
+    const has188 = z.name.toLowerCase().includes('1.8.8');
+    console.log(`Checking ${z.name}: minecraft=${hasMinecraft}, 1.8.8=${has188}`);
+    return hasMinecraft && has188;
+  });
+  
+  console.log("Found game:", mc188);
+  
+  if (!mc188) {
+    alert("Minecraft 1.8.8 not found! Check console for details.");
+    return;
+  }
+  
+  // Open in about:blank (same as your aboutBlank function)
+  const newWindow = window.open("about:blank", "_blank");
+  const url = mc188.url.replace("{COVER_URL}", coverURL).replace("{HTML_URL}", htmlURL);
+  
+  console.log("Opening URL:", url);
+  
+  fetch(url + "?t=" + Date.now())
+    .then(r => r.text())
+    .then(html => {
+      if (newWindow) {
+        newWindow.document.open();
+        newWindow.document.write(html);
+        newWindow.document.close();
+      }
+    })
+    .catch(err => {
+      console.error("Error loading game:", err);
+      alert("Failed to load game: " + err);
+    });
+}
+// Hide banner if user already dismissed it THIS SESSION
+if (sessionStorage.getItem('hideMC188Banner') === 'true') {
+  const banner = document.getElementById('announcement-banner');
+  if (banner) banner.style.display = 'none';
+}
+    
   </script>
 </body>
 
