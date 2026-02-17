@@ -2144,14 +2144,13 @@ function sortZones() {
       }
     }
 
-    function createZoneCard(file, mode = "normal") {
-
+function createZoneCard(file, mode = "normal") {
       const zoneItem = document.createElement("div");
       zoneItem.className = "zone-item";
       zoneItem.onclick = () => openZone(file);
+      
       /* ---------- STAR (NOT FOR RECENTS) ---------- */
       if (mode !== "recent") {
-
         const star = document.createElement("div");
         star.className = "favorite-star";
         star.innerHTML = `
@@ -2173,7 +2172,6 @@ function sortZones() {
 
       /* ---------- IMAGE ---------- */
       const img = document.createElement("img");
-      // Handle custom pinned game covers vs external covers
       if (file.cover && file.cover.startsWith("http")) {
         img.dataset.src = file.cover;
       } else {
@@ -2185,32 +2183,34 @@ function sortZones() {
       img.alt = file.name;
       img.loading = "lazy";
       img.className = "lazy-zone-img";
-/* ---------- BUTTON ---------- */
-const btn = document.createElement("button");
 
-// Game name
-const nameSpan = document.createElement("span");
-nameSpan.textContent = file.name;
-nameSpan.style.fontWeight = "700";
-btn.appendChild(nameSpan);
+      /* ---------- BUTTON WITH PLAY COUNT ---------- */
+      const btn = document.createElement("button");
 
-// User's personal play count
-const playCounts = JSON.parse(localStorage.getItem("playCounts") || "{}");
-const userPlays = playCounts[file.id] || 0;
-if (userPlays > 0) {
-  const countSpan = document.createElement("span");
-  countSpan.className = "play-count";
-  countSpan.textContent = `Played ${userPlays} time${userPlays === 1 ? '' : 's'}`;
-  btn.appendChild(countSpan);
-}
+      // Game name
+      const nameSpan = document.createElement("span");
+      nameSpan.textContent = file.name;
+      nameSpan.style.fontWeight = "700";
+      btn.appendChild(nameSpan);
 
-btn.onclick = (e) => {
-  e.stopPropagation();
-  openZone(file);
-};
+      // User's personal play count (WORKS FOR ALL MODES)
+      const playCounts = JSON.parse(localStorage.getItem("playCounts") || "{}");
+      const userPlays = playCounts[file.id] || 0;
+      if (userPlays > 0) {
+        const countSpan = document.createElement("span");
+        countSpan.className = "play-count";
+        countSpan.textContent = `Played ${userPlays} time${userPlays === 1 ? '' : 's'}`;
+        btn.appendChild(countSpan);
+      }
+
+      btn.onclick = (e) => {
+        e.stopPropagation();
+        openZone(file);
+      };
 
       zoneItem.appendChild(img);
       zoneItem.appendChild(btn);
+      
       /* ---------- LAZY LOAD ---------- */
       const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
@@ -2220,7 +2220,6 @@ btn.onclick = (e) => {
             obs.unobserve(entry.target);
           }
         });
-    
       }, {
         rootMargin: "120px",
         threshold: 0.1
